@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% endblock %}
+{% block content %}
+<div>Аккаунт пользователя: {{ account.user.username }}</div>
+<form action="." method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Create Project"></p>
+</form>
+{% for pr in list_projects %}
+<ul>
+    <li><a href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
+</ul>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block css %}
+    {% endblock %}
+    {% block title %}<title>Agava</title>{% endblock %}
+</head>
+
+<body>
+<header>
+    <div class="header">
+              <ul class="list-header">
+                  {% block header %}
+                  {% endblock %}
+              </ul>
+    </div>
+    <div class="login">
+              {% if user.is_authenticated %}
+                <a href="{% url 'account' %}">{{ user.get_username }}</a>
+                <a href="{% url 'user_logout' %}">log_out</a>
+              {% else %}
+                <a href="{% url 'user_login' %}">login</a>
+              {% endif %}
+          </div>
+</header>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

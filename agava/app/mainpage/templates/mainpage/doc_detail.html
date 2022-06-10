@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/doc_detail.css' %}">
+{% endblock %}
+{% block content %}
+<div class="doc_selected">
+    <div class="list_doc inline">
+        <ul>
+            {% for doc in docum %}
+            <li class="title_item"><a href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="doc_content inline">
+        <h1 class="target_title">{{ doc_id.title }}</h1>
+        <div class="target_content">{{ doc_id.doc_content }}</div>
+    </div>
+</div>
+{% endblock %}

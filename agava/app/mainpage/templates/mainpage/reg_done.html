@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% endblock %}
+{% block content %}
+    <h1>Welcome {{ new_user.first_name }}!</h1>
+    <p>Your account has been successfully created. Now you can <a href="{% url 'user_login' %}">log in</a>.</p>
+{% endblock %}

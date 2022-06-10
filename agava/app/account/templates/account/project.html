@@ -1,0 +1,15 @@
+{% extends "base_account.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% endblock %}
+
+{% block header %}
+<ul>
+    <li class="obj-list-header"><a class="link-header" href="{{ prj_id.id }}/admin">Admin</a></li>
+    <li class="obj-list-header"><a class="link-header" href="{{ prj_id.id }}/devices">Devices</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
