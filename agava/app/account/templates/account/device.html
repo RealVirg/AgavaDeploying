@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base_account.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% endblock %}
+{% block header %}
+    <li class="obj-list-header"><a class="link-header" href="{{ prj.get_absolute_url }}">Back</a></li>
+{% endblock %}
+{% block content %}
+<div>
+    {{ device.name_device }} , {{ device.type_device }}
+    <ul>
+        {{% for param in }}
+    </ul>
+</div>
+{{% if device.type_device == "modbus" %}}
+<form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        {{ form_modbus.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="modbus" name="modbus"></p>
+</form>
+{{% endif %}}
+{{% if device.type_device == "OPD" %}}
+<form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        {{ form_opd.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="OPD" name="OPD"></p>
+</form>
+{{% endif %}}
+{{% if device.type_device == "OPC" %}}
+<form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        {{ form_opc.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="OPC" name="OPC"></p>
+</form>
+{{% endif %}}
+{% endblock %}

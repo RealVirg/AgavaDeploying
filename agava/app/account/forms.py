@@ -40,3 +40,26 @@ class CreateDeviceForm(forms.Form):
     )
     type_device = forms.ChoiceField(choices=ch)
 
+
+class AddParameterOPDForm(forms.Form):
+    number = forms.CharField()
+    name = forms.CharField()
+
+
+class AddRegisterModbusForm(forms.Form):
+    number_device = forms.CharField()
+    number_function_read = forms.CharField()
+    address_read = forms.CharField()
+    number_function_write = forms.CharField()
+    address_write = forms.CharField()
+
+
+class AddTagOPCForm(forms.Form):
+    type_OPC = forms.CharField()
+    address = forms.CharField()
+
+
+class AddParameterForm(forms.Form):
+    name_parameter = forms.CharField()
+    type_parameter = forms.CharField()
+

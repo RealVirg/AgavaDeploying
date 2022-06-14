@@ -3,8 +3,10 @@ import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-from .models import AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel
-from .forms import CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm
+from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
+                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel, AccountParameterOPDModel)
+from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
+                    AddParameterOPDForm, AddTagOPCForm, AddParameterForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -111,7 +113,7 @@ def devices(request, id):
         create_form = CreateDeviceForm(request.POST)
         if create_form.is_valid():
             cd = create_form.cleaned_data
-            device = AccountDevicesModel(name_device=cd['name'], type_devive=cd['type_device'], project=prj_id)
+            device = AccountDevicesModel(name_device=cd['name'], type_device=cd['type_device'], project=prj_id)
             device.save()
     else:
         create_form = CreateDeviceForm()
@@ -124,11 +126,76 @@ def devices(request, id):
 def device(request, id):
     device = get_object_or_404(AccountDevicesModel, id=id)
     prj = get_object_or_404(AccountProjectModel, id=device.project.id)
+    params = AccountParameterModel.objects.filter(device=device)
+    if request.method == 'POST':
+        form = AddParameterForm()
+        if "modbus" in request.POST:
+            form = AddParameterForm(request.POST)
+            form_modbus = AddRegisterModbusForm(request.POST)
+            if form.is_valid() and form_modbus.is_valid():
+                cd = form.cleaned_data
+                cd1 = form_modbus.cleaned_data
+                param = AccountParameterModel(name_parameter=cd['name_parameter'],
+                                              type_parameter=cd['type_parameter'], device=device)
+                param.save()
+                modbus_reg = AccountModbusRegisterModel(number_device=cd1['number_device'],
+                                                        number_function_read=cd1['number_function_read'],
+                                                        address_read=cd1['address_read'],
+                                                        number_function_write=cd1['number_function_write'],
+                                                        address_write=cd1["address_write"])
+                modbus_reg.save()
+                param.modbus_register = modbus_reg
+                param.save()
+
+        else:
+            form_modbus = AddRegisterModbusForm()
+        if "OPD" in request.POST:
+            form = AddParameterForm(request.POST)
+            form_opd = AddParameterOPDForm(request.POST)
+            if form.is_valid() and form_opd.is_valid():
+                cd = form.cleaned_data
+                cd1 = form_opd.cleaned_data
+                param = AccountParameterModel(name_parameter=cd['name_parameter'],
+                                              type_parameter=cd['type_parameter'], device=device)
+                param.save()
+                opd_reg = AccountModbusRegisterModel(number=cd1['number'],
+                                                     name=cd1['name'])
+                opd_reg.save()
+                param.parameter_OPD = opd_reg
+                param.save()
+        else:
+            form_opd = AddParameterOPDForm()
+        if "OPC" in request.POST:
+            form = AddParameterForm(request.POST)
+            form_opc = AddTagOPCForm(request.POST)
+            if form.is_valid() and form_opc.is_valid():
+                cd = form.cleaned_data
+                cd1 = form_opc.cleaned_data
+                param = AccountParameterModel(name_parameter=cd['name_parameter'],
+                                              type_parameter=cd['type_parameter'], device=device)
+                param.save()
+                opc_reg = AccountModbusRegisterModel(type_OPC=cd1['type_OPC'],
+                                                     address=cd1['address'])
+                opc_reg.save()
+                param.tag_OPC = opc_reg
+                param.save()
+        else:
+            form_opc = AddTagOPCForm()
+
+    else:
+        form_modbus = AddRegisterModbusForm()
+        form_opd = AddParameterOPDForm()
+        form_opc = AddTagOPCForm()
+        form = AddParameterForm()
     return render(
         request,
         'account/device.html',
         {
             'prj': prj,
             'device': device,
+            "form_modbus": form_modbus,
+            'form_opd': form_opd,
+            'form_opc': form_opc,
+            'form': form
         }
     )

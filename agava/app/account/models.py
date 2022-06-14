@@ -68,4 +68,41 @@ class AccountParameterModel(models.Model):
     device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
     parameter_OPD = models.OneToOneField(AccountParameterOPDModel, on_delete=models.CASCADE, null=True)
     tag_OPC = models.OneToOneField(AccountTagOPCModel, on_delete=models.CASCADE, null=True)
-    Modbus_register = models.OneToOneField(AccountModbusRegisterModel, on_delete=models.CASCADE, null=True)
+    modbus_register = models.OneToOneField(AccountModbusRegisterModel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        res = ""
+        if self.parameter_OPD is None:
+            pass
+        else:
+            res += "number: "
+            res += self.parameter_OPD.number
+            res += "name: "
+            res += self.parameter_OPD.name
+            res += " "
+
+        if self.tag_OPC is None:
+            pass
+        else:
+            res += "type_OPC: "
+            res += self.tag_OPC.type_OPC
+            res += "address: "
+            res += self.tag_OPC.address
+            res += " "
+
+        if self.modbus_register is None:
+            pass
+        else:
+            res += "number_device: "
+            res += self.modbus_register.number_device
+            res += "umber_function_read: "
+            res += self.modbus_register.umber_function_read
+            res += "address_read: "
+            res += self.modbus_register.address_read
+            res += "number_function_write: "
+            res += self.modbus_register.number_function_write
+            res += "address_write: "
+            res += self.modbus_register.address_write
+            res += " "
+
+        return res
