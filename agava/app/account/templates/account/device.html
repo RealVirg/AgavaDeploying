@@ -10,14 +10,14 @@
 <div>
     {{ device.name_device }} , {{ device.type_device }}
     <ul>
-        {{% for param in params %}}
+        {% for param in params %}
         <li>
             {{ param }}
         </li>
-        {{% endfor %}}
+        {% endfor %}
     </ul>
 </div>
-{{% if device.type_device == "modbus" %}}
+{% if device.type_device == "modbus" %}
 <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
@@ -25,8 +25,8 @@
         {% csrf_token %}
         <p><input type="submit" value="modbus" name="modbus"></p>
 </form>
-{{% endif %}}
-{{% if device.type_device == "OPD" %}}
+{% endif %}
+{% if device.type_device == "OPD" %}
 <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
@@ -34,8 +34,8 @@
         {% csrf_token %}
         <p><input type="submit" value="OPD" name="OPD"></p>
 </form>
-{{% endif %}}
-{{% if device.type_device == "OPC" %}}
+{% endif %}
+{% if device.type_device == "OPC" %}
 <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
@@ -43,5 +43,5 @@
         {% csrf_token %}
         <p><input type="submit" value="OPC" name="OPC"></p>
 </form>
-{{% endif %}}
+{% endif %}
 {% endblock %}
