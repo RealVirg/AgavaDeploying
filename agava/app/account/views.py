@@ -106,16 +106,29 @@ def devices(request, id):
     if not check_own_project(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
-    dvs = prj_id.devices.all()
+    dvs = AccountDevicesModel.objects.filter(project=prj_id)
     if request.method == 'POST' and prj_id.permissions.get(account=AccountModel.users.get(user=request.user)).device:
         create_form = CreateDeviceForm(request.POST)
         if create_form.is_valid():
             cd = create_form.cleaned_data
-            device = AccountDevicesModel(name_device=cd['name'])
+            device = AccountDevicesModel(name_device=cd['name'], type_devive=cd['type_device'], project=prj_id)
             device.save()
-            prj_id.devices.add(device)
     else:
         create_form = CreateDeviceForm()
     return render(request,
                   'account/devices.html',
                   {'prj_id': prj_id, 'create_form': create_form, "dvs": dvs})
+
+
+@login_required
+def device(request, id):
+    device = get_object_or_404(AccountDevicesModel, id=id)
+    prj = get_object_or_404(AccountProjectModel, id=device.project.id)
+    return render(
+        request,
+        'account/device.html',
+        {
+            'prj': prj,
+            'device': device,
+        }
+    )

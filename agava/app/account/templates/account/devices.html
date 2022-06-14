@@ -9,7 +9,7 @@
 {% block content %}
 <ul>
     {% for device in dvs %}
-        <li>{{ device.name_device }}</li>
+    <li><a href="device.get_absolute_url" >{{ device.name_device }}</a></li>
     {% endfor %}
 </ul>
 <form action="." method="post">
