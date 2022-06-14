@@ -18,7 +18,7 @@
     </ul>
 </div>
 {% if device.type_device == "modbus" %}
-<form action="." method="post">
+<form method="post">
         {{ form.as_p }}
         {% csrf_token %}
         {{ form_modbus.as_p }}
@@ -27,7 +27,7 @@
 </form>
 {% endif %}
 {% if device.type_device == "OPD" %}
-<form action="." method="post">
+<form method="post">
         {{ form.as_p }}
         {% csrf_token %}
         {{ form_opd.as_p }}
@@ -36,7 +36,7 @@
 </form>
 {% endif %}
 {% if device.type_device == "OPC" %}
-<form action="." method="post">
+<form method="post">
         {{ form.as_p }}
         {% csrf_token %}
         {{ form_opc.as_p }}
