@@ -158,8 +158,7 @@ def device(request, id):
                 param = AccountParameterModel(name_parameter=cd['name_parameter'],
                                               type_parameter=cd['type_parameter'], device=device)
                 param.save()
-                opd_reg = AccountModbusRegisterModel(number=cd1['number'],
-                                                     name=cd1['name'])
+                opd_reg = AccountTagOPCModel(number=cd1['number'], name=cd1['name'])
                 opd_reg.save()
                 param.parameter_OPD = opd_reg
                 param.save()
@@ -174,8 +173,8 @@ def device(request, id):
                 param = AccountParameterModel(name_parameter=cd['name_parameter'],
                                               type_parameter=cd['type_parameter'], device=device)
                 param.save()
-                opc_reg = AccountModbusRegisterModel(type_OPC=cd1['type_OPC'],
-                                                     address=cd1['address'])
+                opc_reg = AccountTagOPCModel(type_OPC=cd1['type_OPC'],
+                                             address=cd1['address'])
                 opc_reg.save()
                 param.tag_OPC = opc_reg
                 param.save()
