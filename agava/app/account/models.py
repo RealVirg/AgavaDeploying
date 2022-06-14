@@ -13,7 +13,7 @@ class AccountModel(models.Model):
 
 
 class AccountPermissionsModel(models.Model):
-    account = models.OneToOneField(AccountModel, on_delete=models.CASCADE, null=True)
+    account = models.ForeignKey(AccountModel, on_delete=models.CASCADE, null=True)
     admin = models.BooleanField(default=True)
     device = models.BooleanField(default=True)
     tables = models.BooleanField(default=True)

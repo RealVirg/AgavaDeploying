@@ -3,6 +3,9 @@ header {
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
+  height: 60px;
+  border: solid;
+  border-color: black;
 }
 .header {
   flex-grow: 1;
