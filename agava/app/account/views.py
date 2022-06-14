@@ -196,6 +196,7 @@ def device(request, id):
             "form_modbus": form_modbus,
             'form_opd': form_opd,
             'form_opc': form_opc,
-            'form': form
+            'form': form,
+            'params': params
         }
     )

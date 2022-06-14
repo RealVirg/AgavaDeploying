@@ -10,7 +10,11 @@
 <div>
     {{ device.name_device }} , {{ device.type_device }}
     <ul>
-        {{% for param in }}
+        {{% for param in params %}}
+        <li>
+            {{ param }}
+        </li>
+        {{% endfor %}}
     </ul>
 </div>
 {{% if device.type_device == "modbus" %}}
