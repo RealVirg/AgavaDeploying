@@ -14,14 +14,14 @@
                   {% endblock %}
               </ul>
     </div>
-    <div class="login">
+    <ul class="login">
               {% if user.is_authenticated %}
-                <a class="boy" href="{% url 'account' %}">{{ user.get_username }}</a>
-                <a class="boy" href="{% url 'user_logout' %}">log_out</a>
+                <li class="boy"><a href="{% url 'account' %}">{{ user.get_username }}</a></li>
+                <li class="boy"><a href="{% url 'user_logout' %}">log_out</a></li>
               {% else %}
-                <a class="boy" href="{% url 'user_login' %}">login</a>
+                <li class="boy"><a href="{% url 'user_login' %}">login</a></li>
               {% endif %}
-          </div>
+    </ul>
 </header>
 {% block content %}
 
