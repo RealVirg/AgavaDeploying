@@ -16,10 +16,10 @@
     </div>
     <div class="login">
               {% if user.is_authenticated %}
-                <a href="{% url 'account' %}">{{ user.get_username }}</a>
-                <a href="{% url 'user_logout' %}">log_out</a>
+                <a class="boy" href="{% url 'account' %}">{{ user.get_username }}</a>
+                <a class="boy" href="{% url 'user_logout' %}">log_out</a>
               {% else %}
-                <a href="{% url 'user_login' %}">login</a>
+                <a class="boy" href="{% url 'user_login' %}">login</a>
               {% endif %}
           </div>
 </header>
