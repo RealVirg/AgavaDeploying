@@ -65,6 +65,7 @@ class AccountParameterOPDModel(models.Model):
 class AccountParameterModel(models.Model):
     name_parameter = models.CharField(default="parameter", max_length=200)
     type_parameter = models.CharField(default="type_parameter", max_length=200)
+    read_or_write = models.CharField(default='read', max_length=200)
     device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
     parameter_OPD = models.OneToOneField(AccountParameterOPDModel, on_delete=models.CASCADE, null=True)
     tag_OPC = models.OneToOneField(AccountTagOPCModel, on_delete=models.CASCADE, null=True)

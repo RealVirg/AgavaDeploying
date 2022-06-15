@@ -136,7 +136,9 @@ def device(request, id):
                 cd = form.cleaned_data
                 cd1 = form_modbus.cleaned_data
                 param = AccountParameterModel(name_parameter=cd['name_parameter'],
-                                              type_parameter=cd['type_parameter'], device=device)
+                                              type_parameter=cd['type_parameter'],
+                                              read_or_write=cd['read_or_write'],
+                                              device=device)
                 param.save()
                 modbus_reg = AccountModbusRegisterModel(number_device=cd1['number_device'],
                                                         number_function_read=cd1['number_function_read'],

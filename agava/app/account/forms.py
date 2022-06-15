@@ -47,18 +47,13 @@ class AddParameterOPDForm(forms.Form):
 
 class AddRegisterModbusForm(forms.Form):
     number_device = forms.CharField()
-    ch = (
-        ('read', "read"),
-        ('write', "write")
-    )
-    read_or_write = forms.ChoiceField(choices=ch)
-    number_function_read = forms.CharField()
+    number_function_read = forms.CharField(label='')
     number_function_read.required = False
-    address_read = forms.CharField()
+    address_read = forms.CharField(label='', help_text='adr-rd')
     address_read.required = False
-    number_function_write = forms.CharField()
+    number_function_write = forms.CharField(label='')
     number_function_write.required = False
-    address_write = forms.CharField()
+    address_write = forms.CharField(label='', help_text='adr-wr')
     address_write.required = False
 
 
@@ -70,4 +65,9 @@ class AddTagOPCForm(forms.Form):
 class AddParameterForm(forms.Form):
     name_parameter = forms.CharField()
     type_parameter = forms.CharField()
+    ch = (
+        ('read', "read"),
+        ('write', "write")
+    )
+    read_or_write = forms.ChoiceField(choices=ch)
 
