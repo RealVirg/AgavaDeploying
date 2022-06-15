@@ -49,11 +49,11 @@ class AddRegisterModbusForm(forms.Form):
     number_device = forms.CharField()
     number_function_read = forms.CharField(label='')
     number_function_read.required = False
-    address_read = forms.CharField(label='', help_text='adr-rd')
+    address_read = forms.CharField(label='')
     address_read.required = False
     number_function_write = forms.CharField(label='')
     number_function_write.required = False
-    address_write = forms.CharField(label='', help_text='adr-wr')
+    address_write = forms.CharField(label='')
     address_write.required = False
 
 
