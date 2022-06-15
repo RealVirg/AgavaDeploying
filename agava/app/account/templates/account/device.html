@@ -25,6 +25,7 @@
         {% csrf_token %}
         <p><input type="submit" value="modbus" name="modbus"></p>
 </form>
+<script>
 $('#id_read_or_write').change(function () {
     var valueSelected = $(this).val();
 
@@ -40,5 +41,6 @@ $('#id_read_or_write').change(function () {
             $('#id_address_write').hide();
           }
 });
+</script>
 {% endif %}
 {% endblock %}
