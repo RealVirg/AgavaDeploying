@@ -133,7 +133,8 @@ def device(request, id):
             form_del = DelParameterForm(id, request.POST)
             if form_del.is_valid():
                 cd = form_del.cleaned_data
-                AccountParameterModel.objects.get(id=cd['parameter'].id).remove()
+                par = AccountParameterModel.objects.get(id=cd['parameter'].id)
+                par.remove()
         else:
             form_del = DelParameterForm(id)
         if "modbus" in request.POST:
