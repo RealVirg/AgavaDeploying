@@ -34,9 +34,7 @@ class NewAdminUserForm(forms.Form):
 class CreateDeviceForm(forms.Form):
     name = forms.CharField()
     ch = (
-        ('modbus', "modbus"),
-        ('OPC', "OPC"),
-        ('OPD', 'OPD')
+        ('modbus-tcp', "modbus-tcp")
     )
     type_device = forms.ChoiceField(choices=ch)
 
@@ -48,6 +46,11 @@ class AddParameterOPDForm(forms.Form):
 
 class AddRegisterModbusForm(forms.Form):
     number_device = forms.CharField()
+    ch = (
+        ('read', "read"),
+        ('write', "write")
+    )
+    read_or_write = forms.CharField(choices=ch)
     number_function_read = forms.CharField()
     address_read = forms.CharField()
     number_function_write = forms.CharField()

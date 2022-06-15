@@ -149,42 +149,8 @@ def device(request, id):
 
         else:
             form_modbus = AddRegisterModbusForm()
-        if "OPD" in request.POST:
-            form = AddParameterForm(request.POST)
-            form_opd = AddParameterOPDForm(request.POST)
-            if form.is_valid() and form_opd.is_valid():
-                cd = form.cleaned_data
-                cd1 = form_opd.cleaned_data
-                param = AccountParameterModel(name_parameter=cd['name_parameter'],
-                                              type_parameter=cd['type_parameter'], device=device)
-                param.save()
-                opd_reg = AccountTagOPCModel(number=cd1['number'], name=cd1['name'])
-                opd_reg.save()
-                param.parameter_OPD = opd_reg
-                param.save()
-        else:
-            form_opd = AddParameterOPDForm()
-        if "OPC" in request.POST:
-            form = AddParameterForm(request.POST)
-            form_opc = AddTagOPCForm(request.POST)
-            if form.is_valid() and form_opc.is_valid():
-                cd = form.cleaned_data
-                cd1 = form_opc.cleaned_data
-                param = AccountParameterModel(name_parameter=cd['name_parameter'],
-                                              type_parameter=cd['type_parameter'], device=device)
-                param.save()
-                opc_reg = AccountTagOPCModel(type_OPC=cd1['type_OPC'],
-                                             address=cd1['address'])
-                opc_reg.save()
-                param.tag_OPC = opc_reg
-                param.save()
-        else:
-            form_opc = AddTagOPCForm()
-
     else:
         form_modbus = AddRegisterModbusForm()
-        form_opd = AddParameterOPDForm()
-        form_opc = AddTagOPCForm()
         form = AddParameterForm()
     return render(
         request,
@@ -193,8 +159,6 @@ def device(request, id):
             'prj': prj,
             'device': device,
             "form_modbus": form_modbus,
-            'form_opd': form_opd,
-            'form_opc': form_opc,
             'form': form,
             'params': params
         }

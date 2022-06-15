@@ -17,7 +17,7 @@
         {% endfor %}
     </ul>
 </div>
-{% if device.type_device == "modbus" %}
+{% if device.type_device == "modbus-tcp" %}
 <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
@@ -25,23 +25,21 @@
         {% csrf_token %}
         <p><input type="submit" value="modbus" name="modbus"></p>
 </form>
-{% endif %}
-{% if device.type_device == "OPD" %}
-<form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        {{ form_opd.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="OPD" name="OPD"></p>
-</form>
-{% endif %}
-{% if device.type_device == "OPC" %}
-<form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        {{ form_opc.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="OPC" name="OPC"></p>
-</form>
+$('#id_read_or_write').change(function () {
+    var optionSelected = $('option:selected', this);
+    var valueSelected = $(this).val();
+
+    if (valueSelected === 'write') {
+            $('#id_number_function_read').hide();
+            $('#id_address_read').hide();
+            $('#id_number_function_write').show();
+            $('#id_address_write').show();
+          } else {
+            $('#id_number_function_read').show();
+            $('#id_address_read').show();
+            $('#id_number_function_write').hide();
+            $('#id_address_write').hide();
+          }
+});
 {% endif %}
 {% endblock %}
