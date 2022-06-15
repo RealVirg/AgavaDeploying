@@ -8,9 +8,9 @@
 {% block content %}
 <div class="doc_selected">
     <div class="list_doc inline">
-        <ul>
+        <ul class="l">
             {% for doc in docum %}
-            <li class="title_item"><a href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
+                <li class="title_item"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
             {% endfor %}
         </ul>
     </div>
