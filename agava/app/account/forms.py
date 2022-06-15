@@ -34,7 +34,8 @@ class NewAdminUserForm(forms.Form):
 class CreateDeviceForm(forms.Form):
     name = forms.CharField()
     ch = (
-        ('modbus-tcp', "modbus-tcp")
+        ('modbus-tcp', "modbus-tcp"),
+        ('device-type-2', 'device-type-2')
     )
     type_device = forms.ChoiceField(choices=ch)
 
