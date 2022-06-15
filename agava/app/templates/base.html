@@ -9,11 +9,13 @@
 <body>
   {% block sidebar %}
   <header>
-      <div class="header">
-          <ul class="list-header">
-              <li class="obj-list-header"><a class="link-header" href="{% url 'mainpage' %}">Home</a></li>
-              <li class="obj-list-header"><a class="link-header" href="{% url 'doc' %}">doc</a></li>
-          </ul>
+      <div class="page">
+          <nav class="page__menu page__custom-settings menu">
+              <ul class="menu__list r-list">
+                  <li class="menu__group"><a class="menu__link r-link text-underlined" href="{% url 'mainpage' %}">Home</a></li>
+                  <li class="menu__group"><a class="menu__link r-link text-underlined" href="{% url 'doc' %}">doc</a></li>
+              </ul>
+          </nav>
       </div>
       <div class="login">
           {% if user.is_authenticated %}
