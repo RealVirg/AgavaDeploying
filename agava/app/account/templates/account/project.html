@@ -5,10 +5,8 @@
 {% endblock %}
 
 {% block header %}
-<ul>
-    <li class="obj-list-header"><a class="link-header" href="{{ prj_id.id }}/admin">Admin</a></li>
-    <li class="obj-list-header"><a class="link-header" href="{{ prj_id.id }}/devices">Devices</a></li>
-</ul>
+    <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.id }}/admin">Admin</a></li>
+    <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.id }}/devices">Devices</a></li>
 {% endblock %}
 
 {% block content %}

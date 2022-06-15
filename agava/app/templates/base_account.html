@@ -8,11 +8,13 @@
 
 <body>
 <header>
-    <div class="header">
-              <ul class="list-header">
+    <div class="page">
+          <nav class="page__menu page__custom-settings menu">
+              <ul class="menu__list r-list">
                   {% block header %}
                   {% endblock %}
               </ul>
+          </nav>
     </div>
     <ul class="login">
               {% if user.is_authenticated %}
