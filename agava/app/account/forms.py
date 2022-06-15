@@ -71,3 +71,7 @@ class AddParameterForm(forms.Form):
     )
     read_or_write = forms.ChoiceField(choices=ch)
 
+
+class DelParameterForm(forms.Form):
+    pass
+
