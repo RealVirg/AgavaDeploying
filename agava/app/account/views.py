@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
                      AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel, AccountParameterOPDModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterOPDForm, AddTagOPCForm, AddParameterForm)
+                    AddParameterOPDForm, AddTagOPCForm, AddParameterForm, DelParameterForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -129,6 +129,13 @@ def device(request, id):
     params = AccountParameterModel.objects.filter(device=device)
     if request.method == 'POST':
         form = AddParameterForm()
+        if "del" in request.POST:
+            form_del = DelParameterForm(id, request.POST)
+            if form_del.is_valid():
+                cd = form_del.cleaned_data
+                AccountParameterModel.objects.get(id=cd['parameter']).remove()
+        else:
+            form_del = DelParameterForm(id)
         if "modbus" in request.POST:
             form = AddParameterForm(request.POST)
             form_modbus = AddRegisterModbusForm(request.POST)
@@ -154,6 +161,7 @@ def device(request, id):
     else:
         form_modbus = AddRegisterModbusForm()
         form = AddParameterForm()
+        form_del = DelParameterForm(id)
     return render(
         request,
         'account/device.html',
@@ -161,6 +169,7 @@ def device(request, id):
             'prj': prj,
             'device': device,
             "form_modbus": form_modbus,
+            'form_del': form_del,
             'form': form,
             'params': params
         }

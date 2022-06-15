@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django import forms
-from .models import AccountProjectModel, AccountModel
+from .models import AccountProjectModel, AccountModel, AccountParameterModel, AccountDevicesModel
+from django.shortcuts import get_object_or_404
 import logging
 
 
@@ -73,5 +74,8 @@ class AddParameterForm(forms.Form):
 
 
 class DelParameterForm(forms.Form):
-    pass
+    def __init__(self, id, *args, **kwargs):
+        super(DelParameterForm, self).__init__(*args, **kwargs)
+        self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
+            device=get_object_or_404(AccountDevicesModel, id=id)))
 
