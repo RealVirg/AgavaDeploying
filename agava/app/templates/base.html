@@ -17,14 +17,14 @@
               </ul>
           </nav>
       </div>
-      <div class="login">
+      <ul class="login">
           {% if user.is_authenticated %}
-            <a href="{% url 'account' %}">{{ user.get_username }}</a>
-            <a href="{% url 'user_logout' %}">log_out</a>
+            <li class="boy"><a href="{% url 'account' %}">{{ user.get_username }}</a></li>
+            <li class="boy"><a href="{% url 'user_logout' %}">log_out</a></li>
           {% else %}
-            <a href="{% url 'user_login' %}">login</a>
+            <li class="boy"><a href="{% url 'user_login' %}">login</a></li>
           {% endif %}
-      </div>
+      </ul>
   </header>
   {% endblock %}
   {% block content %}
