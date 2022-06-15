@@ -50,7 +50,7 @@ class AddRegisterModbusForm(forms.Form):
         ('read', "read"),
         ('write', "write")
     )
-    read_or_write = forms.CharField(choices=ch)
+    read_or_write = forms.ChoiceField(choices=ch)
     number_function_read = forms.CharField()
     address_read = forms.CharField()
     number_function_write = forms.CharField()
