@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Welcome {{ new_user.first_name }}!</h1>
-    <p>Your account has been successfully created. Now you can <a href="{% url 'user_login' %}">log in</a>.</p>
+<div class="reg-good">
+    <h1 class="title-good">Welcome {{ new_user.first_name }}!</h1>
+    <p class="text-good">Your account has been successfully created. Now you can <a href="{% url 'user_login' %}">log in.</a></p>
+</div>
 {% endblock %}
