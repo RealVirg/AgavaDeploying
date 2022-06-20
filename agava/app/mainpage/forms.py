@@ -10,8 +10,8 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'email')
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': "username"}),
-            'first_name': forms.TextInput(attrs={'placeholder': "firstname"}),
+            'username': forms.TextInput(attrs={'placeholder': "Username(Letters, digits and @/./+/-/_ only.)"}),
+            'first_name': forms.TextInput(attrs={'placeholder': "First name"}),
             'email': forms.EmailInput(attrs={'placeholder': "Email"})
         }
         labels = {
@@ -19,6 +19,7 @@ class UserRegistrationForm(forms.ModelForm):
             'first_name': '',
             'email': ''
         }
+        help_texts = {"username": ""}
 
     def clean_password2(self):
         cd = self.cleaned_data
