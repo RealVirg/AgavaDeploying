@@ -10,11 +10,11 @@
 {% endblock %}
 {% block content %}
 <div class="permissions">
-    <table>
+    <table class="table_permissions">
         <tr>
-            <th>User</th>
-            <th>Admin</th>
-            <th>Device</th>
+            <th class="permission">User</th>
+            <th class="permission">Admin</th>
+            <th class="permission">Device</th>
         </tr>
         {% for usr in perm %}
         <tr>
