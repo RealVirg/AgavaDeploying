@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block content %}
+<div class="container">
     <h1>Log-in</h1>
     <p>Please, use the following form to log-in:</p>
     <form class="login-form" action="." method="post">
@@ -11,5 +12,6 @@
         {% csrf_token %}
         <p><input type="submit" value="Log-in"></p>
     </form>
+</div>
 <a href="{% url 'reg' %}">reg</a>
 {% endblock %}
