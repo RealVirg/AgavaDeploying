@@ -34,12 +34,12 @@ class NewAdminUserForm(forms.Form):
 
 
 class CreateDeviceForm(forms.Form):
-    name = forms.CharField()
+    name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя устройства"}))
     ch = (
         ('modbus-tcp', "modbus-tcp"),
         ('device-type-2', 'device-type-2')
     )
-    type_device = forms.ChoiceField(choices=ch)
+    type_device = forms.ChoiceField(choices=ch, label='Тип устройства ')
 
 
 class AddParameterOPDForm(forms.Form):
@@ -48,15 +48,11 @@ class AddParameterOPDForm(forms.Form):
 
 
 class AddRegisterModbusForm(forms.Form):
-    number_device = forms.CharField()
-    number_function_read = forms.CharField(label='')
-    number_function_read.required = False
-    address_read = forms.CharField(label='')
-    address_read.required = False
-    number_function_write = forms.CharField(label='')
-    number_function_write.required = False
-    address_write = forms.CharField(label='')
-    address_write.required = False
+    number_device = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Номер устройства"}))
+    number_function_read = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Функция чтения"}))
+    address_read = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Адрес чтения"}))
+    number_function_write = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Функция записи"}))
+    address_write = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Адрес записи"}))
 
 
 class AddTagOPCForm(forms.Form):
@@ -65,13 +61,13 @@ class AddTagOPCForm(forms.Form):
 
 
 class AddParameterForm(forms.Form):
-    name_parameter = forms.CharField()
-    type_parameter = forms.CharField()
+    name_parameter = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя параметра"}))
+    type_parameter = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Тип параметра"}))
     ch = (
         ('read', "read"),
         ('write', "write")
     )
-    read_or_write = forms.ChoiceField(choices=ch)
+    read_or_write = forms.ChoiceField(choices=ch, label='Чтение или запись? ')
 
 
 class DelParameterForm(forms.Form):
