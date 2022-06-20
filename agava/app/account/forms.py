@@ -13,17 +13,18 @@ class CreateProjectForm(forms.Form):
 class EditAdminForm(forms.Form):
     def __init__(self, id, *args, **kwargs):
         super(EditAdminForm, self).__init__(*args, **kwargs)
-        self.fields['perm_id'] = forms.ModelChoiceField(AccountProjectModel.projects.get(id=id).permissions.all())
+        self.fields['perm_id'] = forms.ModelChoiceField(AccountProjectModel.projects.get(id=id).permissions.all(),
+                                                        label='Для кого ')
     ch = (
         ('admin', "admin"),
         ('del', "del"),
         ('device', 'device')
     )
-    choice_actions = forms.ChoiceField(choices=ch)
+    choice_actions = forms.ChoiceField(choices=ch, label="Изменить ")
 
 
 class NewAdminUserForm(forms.Form):
-    new_user = forms.CharField()
+    new_user = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Имя пользователя, которого нужно добавить'}))
 
     def clean_new_user(self):
         cd = self.cleaned_data

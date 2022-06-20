@@ -9,41 +9,43 @@
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<div class="permissions">
-    <table class="table_permissions">
-        <tr>
-            <th class="permission">User</th>
-            <th class="permission">Admin</th>
-            <th class="permission">Device</th>
-        </tr>
-        {% for usr in perm %}
-        <tr>
-            <td class="permission">{{ usr.account.user.username }}</td>
-            <td class="permission">{{ usr.admin }}</td>
-            <td class="permission">{{ usr.device }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
-<form class="control" action="." method="post">
-        {{ admin_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="use" name="use"></p>
-</form>
-<div class="add_new_user">
-    <script>
-        function cli(){
-            var but = document.getElementById("id_but");
-            var form = document.getElementById("id_new_user_form");
-            form.style.display = 'block';
-            but.style.display = 'none';
-        }
-    </script>
-    <button class="but" id="id_but" onclick="cli()">Добавить пользователя</button>
-    <form id="id_new_user_form" class="new" action="." method="post">
-            {{ new_user.as_p }}
+<div class="admin_page">
+    <div class="permissions">
+        <table class="table_permissions">
+            <tr>
+                <th class="permission">User</th>
+                <th class="permission">Admin</th>
+                <th class="permission">Device</th>
+            </tr>
+            {% for usr in perm %}
+            <tr>
+                <td class="permission">{{ usr.account.user.username }}</td>
+                <td class="permission">{{ usr.admin }}</td>
+                <td class="permission">{{ usr.device }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form class="control" action="." method="post">
+            {{ admin_form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" value="new" name="new"></p>
+            <p><input type="submit" value="use" name="use"></p>
     </form>
+    <div class="add_new_user">
+        <script>
+            function cli(){
+                var but = document.getElementById("id_but");
+                var form = document.getElementById("id_new_user_form");
+                form.style.display = 'block';
+                but.style.display = 'none';
+            }
+        </script>
+        <button class="but" id="id_but" onclick="cli()">Добавить пользователя</button>
+        <form id="id_new_user_form" class="new" action="." method="post">
+                {{ new_user.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" value="new" name="new"></p>
+        </form>
+    </div>
 </div>
 {% endblock %}
