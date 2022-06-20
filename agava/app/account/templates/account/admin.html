@@ -1,7 +1,9 @@
 {% extends "base_account.html" %}
 {% block css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}" xmlns="http://www.w3.org/1999/html" xmlns="">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/admin.css' %}">
 {% endblock %}
 {% block header %}
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
@@ -12,14 +14,25 @@
         <li>{{ usr.account.user.username }} {{ usr.admin }} {{ usr.device }}</li>
     {% endfor %}
 </ul>
-<form action="." method="post">
+<form class="control" action="." method="post">
         {{ admin_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="use" name="use"></p>
 </form>
-<form action="." method="post">
-        {{ new_user.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="new" name="new"></p>
-</form>
+<div class="add_new_user">
+    <script>
+        var button = document.getElementById("id_but");
+        but.onclick = function(){
+            var form = document.getElementById("id_new_user_form");
+            form.style.display = 'block';
+            this.style.display = 'none';
+        }
+    </script>
+    <button id="id_but">Добавить пользователя</button>
+    <form id="id_new_user_form" class="new" action="." method="post">
+            {{ new_user.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="new" name="new"></p>
+    </form>
+</div>>
 {% endblock %}
