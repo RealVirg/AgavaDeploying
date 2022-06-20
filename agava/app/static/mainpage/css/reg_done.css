@@ -1,0 +1,18 @@
+.reg-good {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.log {
+  text-decoration: none;
+  color: gray;
+  font-size: 25px;
+}
+.log:hover {
+  color: black;
+}
+.title-good {
+  font-size: 25px;
+}
+.user_name {
+  font-size: 35px;
+}

@@ -2,11 +2,13 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/reg_form_style.css' %}">
 {% endblock %}
 {% block content %}
 <div class="reg">
     <h1 class="reg-title">Create an account</h1>
-    <p class="reg-text">Please, sign up using the following form:</p>
+    <h3 class="reg-text">Please, sign up using the following form:</h3>
     <form class="reg-form" action="." method="post">
         {{ user_form.as_p }}
         {% csrf_token %}
