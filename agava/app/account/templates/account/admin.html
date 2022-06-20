@@ -9,11 +9,20 @@
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<ul>
-    {% for usr in perm %}
-        <li>{{ usr.account.user.username }} {{ usr.admin }} {{ usr.device }}</li>
-    {% endfor %}
-</ul>
+<div class="permissions">
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Admin</th>
+            <th>Device</th>
+        </tr>
+        <tr>
+        {% for usr in perm %}
+            <td class="permission">{{ usr.account.user.username }} {{ usr.admin }} {{ usr.device }}</td>
+        {% endfor %}
+        </tr>>
+    </table>
+</div>
 <form class="control" action="." method="post">
         {{ admin_form.as_p }}
         {% csrf_token %}
