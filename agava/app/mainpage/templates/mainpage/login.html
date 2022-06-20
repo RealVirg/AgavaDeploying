@@ -13,7 +13,7 @@
         {{ form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Log-in"></p>
+        <a class="reg" href="{% url 'reg' %}">Don't have acc?</a>
     </form>
-    <a class="reg" href="{% url 'reg' %}">Don't have acc?</a>
 </div>
 {% endblock %}
