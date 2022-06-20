@@ -7,7 +7,7 @@ import logging
 
 
 class CreateProjectForm(forms.Form):
-    name = forms.CharField()
+    name = forms.CharField(label="", widget=forms.CharField(attrs={'placeholder': "name project"}))
 
 
 class EditAdminForm(forms.Form):

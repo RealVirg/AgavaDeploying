@@ -4,11 +4,11 @@
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block content %}
-<div>Аккаунт пользователя: {{ account.user.username }}</div>
+<div class="name-account">Аккаунт пользователя: {{ account.user.username }}</div>
 <form class="create-project" action="." method="post">
     {{ form.as_p }}
     {% csrf_token %}
-    <p><input type="submit" value="Create Project"></p>
+    <p><input type="submit" value="Create Project" class="create"></p>
 </form>
 {% for pr in list_projects %}
 <ul class="list-projects">
