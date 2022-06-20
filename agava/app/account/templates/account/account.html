@@ -4,15 +4,18 @@
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block content %}
-<div class="name-account">Аккаунт пользователя: {{ account.user.username }}</div>
-<form class="create-project" action="." method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" value="Create Project" class="create"></p>
-</form>
-{% for pr in list_projects %}
-<ul class="list-projects">
-    <li class="project"><a href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
-</ul>
-{% endfor %}
+<div class="wrapper">
+    <div class="name-account">Аккаунт пользователя: {{ account.user.username }}</div>
+    <form class="create-project" action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create Project" class="create"></p>
+    </form>
+    <div class="projects">Проекты:</div>
+    {% for pr in list_projects %}
+    <ul class="list-projects">
+        <li class="project"><a href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
+    </ul>
+    {% endfor %}
+</div>
 {% endblock %}

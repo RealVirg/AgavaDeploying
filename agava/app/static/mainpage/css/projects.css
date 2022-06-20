@@ -2,16 +2,27 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-family: "Roboto", Helvetica, Arial, sans-serif;
+  grid-auto-rows: auto;
 }
 .name-account{
   grid-column-start: 1;
   grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  text-align: center;
+}
+.projects{
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
   text-align: center;
 }
 .list-projects{
   list-style-type: none;
   grid-column-start: 2;
   grid-column-end: 4;
+  grid-row-start: 2;
 }
 .link{
   font-size: 30px;
@@ -26,6 +37,7 @@
 .create-project{
   grid-column-start: 1;
   grid-column-end: 2;
+  grid-row-start: 2;
 }
 
 .create-project input[type="text"]{
