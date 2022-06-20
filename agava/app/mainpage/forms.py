@@ -11,19 +11,13 @@ class UserRegistrationForm(forms.ModelForm):
         fields = ('username', 'first_name', 'email')
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': "username"}),
-            'firstname': forms.TextInput(attrs={'placeholder': "firstname"}),
+            'first_name': forms.TextInput(attrs={'placeholder': "firstname"}),
             'email': forms.EmailInput(attrs={'placeholder': "Email"})
         }
         labels = {
             'username': '',
-            'firstname': '',
+            'first_name': '',
             'email': ''
-        }
-
-        required = {
-            "username": True,
-            "email": True,
-            "firstname": True
         }
 
     def clean_password2(self):

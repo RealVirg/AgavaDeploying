@@ -14,6 +14,6 @@
         {% csrf_token %}
         <p><input type="submit" value="Log-in"></p>
     </form>
+    <a class="reg" href="{% url 'reg' %}">Don't have acc?</a>
 </div>
-<a href="{% url 'reg' %}">reg</a>
 {% endblock %}

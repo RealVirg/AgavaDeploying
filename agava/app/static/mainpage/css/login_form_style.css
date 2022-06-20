@@ -144,3 +144,11 @@ fieldset {
 :-ms-input-placeholder {
   color: #888;
 }
+
+.reg {
+    text-decoration: none;
+    color: grey;
+  }
+  .reg:hover {
+    color: black;
+  }
