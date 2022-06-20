@@ -16,7 +16,7 @@
     <div class="projects">Проекты:</div>
     {% for pr in list_projects %}
     <ul class="list-projects">
-        <li class="project"><a href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
+        <li class="project"><a class="link" href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
     </ul>
     {% endfor %}
 </div>
