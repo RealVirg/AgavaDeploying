@@ -16,11 +16,13 @@
             <th>Admin</th>
             <th>Device</th>
         </tr>
-        <tr>
         {% for usr in perm %}
-            <td class="permission">{{ usr.account.user.username }} {{ usr.admin }} {{ usr.device }}</td>
+        <tr>
+            <td class="permission">{{ usr.account.user.username }}</td>
+            <td class="permission">{{ usr.admin }}</td>
+            <td class="permission">{{ usr.device }}</td>
+        </tr>
         {% endfor %}
-        </tr>>
     </table>
 </div>
 <form class="control" action="." method="post">
