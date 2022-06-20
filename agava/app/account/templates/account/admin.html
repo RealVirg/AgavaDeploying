@@ -2,6 +2,8 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/projects.css' %}">
 {% endblock %}
 {% block header %}
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
