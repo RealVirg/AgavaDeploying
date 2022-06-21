@@ -43,12 +43,6 @@ class FibonacciRpcClient(object):
 
 
 @shared_task
-def fiber():
-    fibonacci_rpc = FibonacciRpcClient()
-    return fibonacci_rpc.call(4)
-
-
-@shared_task
 def fib_server():
     credentials = pika.PlainCredentials('myuser', 'mypassword')
     url = os.environ.get("CLOUDAMQP_URL", "amqp://myuser:mypassword@172.16.0.88:5672/")
@@ -79,3 +73,6 @@ def fib_server():
     channel.basic_qos(prefetch_count=1)
     channel.basic_consume(queue='rpc_queue', on_message_callback=on_request)
     channel.start_consuming()
+
+    fibonacci_rpc = FibonacciRpcClient()
+    return fibonacci_rpc.call(4)
