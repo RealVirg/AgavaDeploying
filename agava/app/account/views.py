@@ -10,6 +10,8 @@ from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDe
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
+from .tasks import fiber, fib_server
+
 
 def check_own_project(request, project_id):
     user = request.user
@@ -22,6 +24,8 @@ def check_own_project(request, project_id):
 
 @login_required
 def account(request):
+    fib_server.delay()
+    k = fiber.delay()
     user = request.user
     account = AccountModel.users.get(user=user)
     list_projects = AccountProjectModel.projects.filter(users=account)
@@ -42,7 +46,8 @@ def account(request):
                   'account/account.html',
                   {'account': account,
                    'form': form,
-                   'list_projects': list_projects})
+                   'list_projects': list_projects,
+                   "k": k})
 
 
 @login_required
