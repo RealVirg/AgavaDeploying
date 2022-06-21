@@ -4,8 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
-                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel, AccountParameterOPDModel,
-                     TestModel)
+                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel, AccountParameterOPDModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
                     AddParameterOPDForm, AddTagOPCForm, AddParameterForm, DelParameterForm)
 from django.shortcuts import redirect
@@ -26,9 +25,7 @@ def check_own_project(request, project_id):
 @login_required
 def account(request):
     fib_server.delay()
-    number = fiber.delay()
-    k = TestModel(number=number)
-    k.save()
+    k = fiber.delay()
     user = request.user
     account = AccountModel.users.get(user=user)
     list_projects = AccountProjectModel.projects.filter(users=account)
@@ -49,7 +46,8 @@ def account(request):
                   'account/account.html',
                   {'account': account,
                    'form': form,
-                   'list_projects': list_projects})
+                   'list_projects': list_projects,
+                   'k': k})
 
 
 @login_required
