@@ -2,19 +2,23 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/devices.css' %}">
 {% endblock %}
 {% block header %}
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<ul class="list-div">
-    {% for device in dvs %}
-    <li class="div"><a href="{{ device.get_absolute_url }}">{{ device.name_device }}</a></li>
-    {% endfor %}
-</ul>
-<form class="create-device-form" action="." method="post">
-        {{ create_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="create" name="create"></p>
-</form>
+<div class='device_page'>
+    <ul class="list-div">
+        {% for device in dvs %}
+        <li class="div"><a href="{{ device.get_absolute_url }}">{{ device.name_device }}</a></li>
+        {% endfor %}
+    </ul>
+    <form class="create-device-form" action="." method="post">
+            {{ create_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="create" name="create"></p>
+    </form>
+</div>
 {% endblock %}

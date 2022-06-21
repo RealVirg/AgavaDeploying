@@ -1,0 +1,34 @@
+.device_page{
+  display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    grid-auto-rows: auto;
+}
+
+.create-device-form{
+  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.create-device-form input[type='text'],
+.create-device-form select{
+    margin-right: 10px;
+}
+
+.list-div{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  list-style: none;
+  text-decoration: none;
+}
+.div a{
+  text-decoration: none;
+  color: gray
+}
+.div a:hover{
+  text-decoration: none;
+  color: black
+}
