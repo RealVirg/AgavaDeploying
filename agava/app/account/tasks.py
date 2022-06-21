@@ -45,7 +45,7 @@ class FibonacciRpcClient(object):
 @shared_task
 def fiber():
     fibonacci_rpc = FibonacciRpcClient()
-    return fibonacci_rpc.call(30)
+    return fibonacci_rpc.call(4)
 
 
 @shared_task
