@@ -7,7 +7,7 @@ class FibonacciRpcClient(object):
 
     def __init__(self):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
+            pika.ConnectionParameters(host='172.16.0.88'))
 
         self.channel = self.connection.channel()
 
@@ -48,7 +48,7 @@ def fiber():
 @shared_task
 def fib_server():
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
+        pika.ConnectionParameters(host='172.16.0.88'))
 
     channel = connection.channel()
 
