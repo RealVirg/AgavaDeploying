@@ -25,7 +25,7 @@ def check_own_project(request, project_id):
 @login_required
 def account(request):
     fib_server.delay()
-    k = fiber.delay()
+    k = fiber.delay(4)
     user = request.user
     account = AccountModel.users.get(user=user)
     list_projects = AccountProjectModel.projects.filter(users=account)
