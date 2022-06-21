@@ -51,8 +51,9 @@ def fiber():
 @shared_task
 def fib_server():
     credentials = pika.PlainCredentials('myuser', 'mypassword')
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='172.16.0.88'))
+    url = os.environ.get("CLOUDAMQP_URL", "amqp://myuser:mypassword@172.16.0.88:5672/")
+    params = pika.URLParameters(url)
+    connection = pika.BlockingConnection(params)
 
     channel = connection.channel()
 
