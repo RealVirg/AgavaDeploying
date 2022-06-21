@@ -3,6 +3,10 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 
+class TestModel(models.Model):
+    number = models.CharField(null=True, max_length=100)
+
+
 class AccountModel(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)

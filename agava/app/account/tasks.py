@@ -36,16 +36,16 @@ class FibonacciRpcClient(object):
                 reply_to=self.callback_queue,
                 correlation_id=self.corr_id,
             ),
-            body=str.encode(n, 'utf-8'))
+            body=str(n))
         while self.response is None:
             self.connection.process_data_events()
-        return bytes.decode(self.response, 'utf-8')
+        return int(self.response)
 
 
 @shared_task
 def fiber():
     fibonacci_rpc = FibonacciRpcClient()
-    return fibonacci_rpc.call('4')
+    return fibonacci_rpc.call(4)
 
 
 @shared_task
@@ -68,12 +68,12 @@ def fib_server():
             return fib(n - 1) + fib(n - 2)
 
     def on_request(ch, method, props, body):
-        n = int(bytes.decode(body, 'utf-8'))
+        n = int(body)
         response = fib(n)
         ch.basic_publish(exchange='',
                          routing_key=props.reply_to,
                          properties=pika.BasicProperties(correlation_id=props.correlation_id),
-                         body=str.encode(response, 'utf-8'))
+                         body=str(response))
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     channel.basic_qos(prefetch_count=1)
