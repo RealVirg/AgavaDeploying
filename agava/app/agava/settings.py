@@ -163,4 +163,4 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 
-CELERY_BROKER_URL = 'ampq://localhost'
+CELERY_BROKER_URL = 'amqp://localhost'
