@@ -1,14 +1,16 @@
 from celery import shared_task
 import uuid
 import pika
+import os
 
 
 class FibonacciRpcClient(object):
 
     def __init__(self):
         credentials = pika.PlainCredentials('myuser', 'mypassword')
-        self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters('172.16.0.88', 5672, '/', credentials))
+        url = os.environ.get("CLOUDAMQP_URL", "amqp://myuser:mypassword@172.16.0.88:5672/")
+        params = pika.URLParameters(url)
+        self.connection = pika.BlockingConnection(params)
 
         self.channel = self.connection.channel()
 
