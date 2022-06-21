@@ -26,7 +26,8 @@ def check_own_project(request, project_id):
 @login_required
 def account(request):
     fib_server.delay()
-    k = TestModel(number=fiber.delay())
+    number = fiber.delay()
+    k = TestModel(number=number)
     k.save()
     user = request.user
     account = AccountModel.users.get(user=user)
@@ -48,8 +49,7 @@ def account(request):
                   'account/account.html',
                   {'account': account,
                    'form': form,
-                   'list_projects': list_projects,
-                   'k': k})
+                   'list_projects': list_projects})
 
 
 @login_required
