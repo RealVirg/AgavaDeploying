@@ -1,6 +1,7 @@
 from celery import shared_task
 import pika
 import logging
+import time
 
 
 class Subscriber:
@@ -35,7 +36,10 @@ class Subscriber:
         channel.queue_bind(queue=queue_name, exchange=self.config['exchange1'], routing_key=binding_key)
         channel.basic_consume(queue=queue_name,
                               on_message_callback=self.on_message_callback, auto_ack=True)
-        channel.start_consuming()
+        while True:
+            channel.start_consuming()
+            channel.stop_consuming()
+            time.sleep(1)
 
     def __del__(self):
         self.connection.close()
