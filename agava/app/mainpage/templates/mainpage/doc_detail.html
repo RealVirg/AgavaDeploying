@@ -10,7 +10,10 @@
     <div class="list_doc inline">
         <ul class="l">
             {% for doc in docum %}
-                <li class="title_item"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
+                {% if doc.id == doc_id.id %}
+                    <li class="title_item target"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
+                {% else %}
+                    <li class="title_item"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
             {% endfor %}
         </ul>
     </div>

@@ -30,26 +30,26 @@
         {% csrf_token %}
         <p><input type="submit" value="del" name="del"></p>
 </form>
-<script>
-  function update() {
-  var select = document.getElementById("id_read_or_write");
-  var valueSelected = select.options[select.selectedIndex].value
-  document.getElementById('id_number_function_read').placeholder = "Номер функции чтения";
-  document.getElementById('id_address_read').placeholder = "Адрес";
-  document.getElementById('id_number_function_write').placeholder = "Номер функции записи";
-  document.getElementById('id_address_write').placeholder = "Адрес";
-  if (valueSelected == 'write') {
-      document.getElementById('id_number_function_read').hidden = true;
-      document.getElementById('id_address_read').hidden = true;
-      document.getElementById('id_number_function_write').hidden = false;
-      document.getElementById('id_address_write').hidden = false;
-  } else {
-      document.getElementById('id_number_function_write').hidden = true;
-      document.getElementById('id_address_write').hidden = true;
-      document.getElementById('id_number_function_read').hidden = false;
-     document.getElementById('id_address_read').hidden = false;
-  }}
-  update();
-</script>
+<!--<script>-->
+<!--  function update() {-->
+<!--  var select = document.getElementById("id_read_or_write");-->
+<!--  var valueSelected = select.options[select.selectedIndex].value-->
+<!--  document.getElementById('id_number_function_read').placeholder = "Номер функции чтения";-->
+<!--  document.getElementById('id_address_read').placeholder = "Адрес";-->
+<!--  document.getElementById('id_number_function_write').placeholder = "Номер функции записи";-->
+<!--  document.getElementById('id_address_write').placeholder = "Адрес";-->
+<!--  if (valueSelected == 'write') {-->
+<!--      document.getElementById('id_number_function_read').hidden = true;-->
+<!--      document.getElementById('id_address_read').hidden = true;-->
+<!--      document.getElementById('id_number_function_write').hidden = false;-->
+<!--      document.getElementById('id_address_write').hidden = false;-->
+<!--  } else {-->
+<!--      document.getElementById('id_number_function_write').hidden = true;-->
+<!--      document.getElementById('id_address_write').hidden = true;-->
+<!--      document.getElementById('id_number_function_read').hidden = false;-->
+<!--     document.getElementById('id_address_read').hidden = false;-->
+<!--  }}-->
+<!--  update();-->
+<!--</script>-->
 {% endif %}
 {% endblock %}
