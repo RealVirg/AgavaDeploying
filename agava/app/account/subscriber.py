@@ -33,3 +33,7 @@ class Subscriber:
 
     def __del__(self):
         self.connection.close()
+
+
+# config = { 'host': '172.16.0.88', 'port': 5672, 'exchange' : 'my_exchange',
+#            'credentials': pika.PlainCredentials("myuser", 'mypassword')}

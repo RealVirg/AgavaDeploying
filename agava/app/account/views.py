@@ -10,8 +10,14 @@ from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDe
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
+from .tasks import test_msg
+import pika
+
 
 def check_own_project(request, project_id):
+    test_msg({'host': '172.16.0.88', 'port': 5672, 'exchange': 'my_exchange',
+              'credentials': pika.PlainCredentials("myuser", 'mypassword')}, 'nse_queue', 'nse.*', 'nse.nifty',
+             'New Data')
     user = request.user
     current_account = AccountModel.users.get(user=user)
     prj_id = get_object_or_404(AccountProjectModel, id=project_id)
