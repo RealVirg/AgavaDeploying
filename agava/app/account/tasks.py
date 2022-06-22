@@ -28,21 +28,14 @@ class Subscriber:
 
     def setup(self, queue_name, binding_key, routing_key_request, request):
         self.request(routing_key_request, request)
-
-        logging.warning("create response channel")
         channel = self.connection.channel()
-        logging.warning("create response point")
         channel.exchange_declare(exchange=self.config['exchange1'],
                                  exchange_type='topic')
         channel.queue_declare(queue=queue_name)
         channel.queue_bind(queue=queue_name, exchange=self.config['exchange1'], routing_key=binding_key)
         channel.basic_consume(queue=queue_name,
                               on_message_callback=self.on_message_callback, auto_ack=True)
-        logging.warning("start listing queue")
-        try:
-            channel.start_consuming()
-        except KeyboardInterrupt:
-            channel.stop_consuming()
+        channel.start_consuming()
 
     def __del__(self):
         self.connection.close()
