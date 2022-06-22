@@ -32,10 +32,10 @@ class Subscriber:
         logging.warning("create response channel")
         channel = self.connection.channel()
         logging.warning("create response point")
-        channel.exchange_declare(exchange=self.config['exchange'],
+        channel.exchange_declare(exchange=self.config['exchange1'],
                                  exchange_type='topic')
         channel.queue_declare(queue=queue_name)
-        channel.queue_bind(queue=queue_name, exchange=self.config['exchange'], routing_key=binding_key)
+        channel.queue_bind(queue=queue_name, exchange=self.config['exchange1'], routing_key=binding_key)
         channel.basic_consume(queue=queue_name,
                               on_message_callback=self.on_message_callback, auto_ack=True)
         logging.warning("start listing queue")
