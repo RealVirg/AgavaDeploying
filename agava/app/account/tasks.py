@@ -1,5 +1,6 @@
 from celery import shared_task
 import pika
+import logging
 
 
 class Subscriber:
@@ -36,5 +37,7 @@ class Subscriber:
 
 @shared_task
 def test_msg(config, queue_name, binding_key, routing_key_request, request):
+    logging.warning("create Subscriber")
     subscriber = Subscriber(config)
+    logging.warning("launch subscriber")
     subscriber.setup(queue_name, binding_key, routing_key_request, request)
