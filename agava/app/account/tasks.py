@@ -15,17 +15,14 @@ class Subscriber:
         return pika.BlockingConnection(parameters)
 
     def request(self, routing_key_request, request):
-        logging.warning("create request channel")
         channel = self.connection.channel()
-
-        logging.warning("create in point")
         channel.exchange_declare(exchange=self.config['exchange'], exchange_type='topic')
-
-        logging.warning("publish request")
         channel.basic_publish(exchange=self.config['exchange'], routing_key=routing_key_request, body=request)
+        self.connection.close()
+        self.connection = self._create_connection()
 
     def on_message_callback(self, channel, method, properties, body):
-        binding_key = method.routing_key
+        print(" [x] %r" % body)
 
     def setup(self, queue_name, binding_key, routing_key_request, request):
         self.request(routing_key_request, request)
@@ -36,10 +33,7 @@ class Subscriber:
         channel.queue_bind(queue=queue_name, exchange=self.config['exchange1'], routing_key=binding_key)
         channel.basic_consume(queue=queue_name,
                               on_message_callback=self.on_message_callback, auto_ack=True)
-        while True:
-            channel.start_consuming()
-            channel.stop_consuming()
-            time.sleep(1)
+        channel.start_consuming()
 
     def __del__(self):
         self.connection.close()
