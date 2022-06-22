@@ -14,6 +14,7 @@
                     <li class="title_item target"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
                 {% else %}
                     <li class="title_item"><a class="url-doc" href="{{doc.get_absolute_url}}"> {{doc.title}} </a></li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
