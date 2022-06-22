@@ -30,6 +30,10 @@ class Subscriber:
         channel.queue_bind(queue=queue_name, exchange=self.config['exchange'], routing_key=binding_key)
         channel.basic_consume(queue=queue_name,
                               on_message_callback=self.on_message_callback, auto_ack=True)
+        try:
+            channel.start_consuming()
+        except KeyboardInterrupt:
+            channel.stop_consuming()
 
     def __del__(self):
         self.connection.close()
