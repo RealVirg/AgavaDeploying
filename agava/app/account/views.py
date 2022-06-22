@@ -25,8 +25,7 @@ def check_own_project(request, project_id):
 
 @login_required
 def account(request):
-    test_msg({'host': '172.16.0.88', 'port': 5672, 'exchange': 'my_exchange',
-              'credentials': pika.PlainCredentials("myuser", 'mypassword')}, 'nse_queue', 'nse.*', 'nse.nifty',
+    test_msg({'host': '172.16.0.88', 'port': 5672, 'exchange': 'my_exchange'}, 'nse_queue', 'nse.*', 'nse.nifty',
              'New Data')
     user = request.user
     account = AccountModel.users.get(user=user)
