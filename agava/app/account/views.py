@@ -10,9 +10,6 @@ from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDe
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
-from .tasks import test_msg
-import pika
-
 
 def check_own_project(request, project_id):
     user = request.user
@@ -25,14 +22,6 @@ def check_own_project(request, project_id):
 
 @login_required
 def account(request):
-    test_msg({'host': '172.16.0.88',
-              'port': 5672,
-              'exchange': 'my_exchange',
-              'exchange1': 'exchange'},
-             'nse_queue',
-             'nse.*',
-             'nse.nifty',
-             'New Data')
     user = request.user
     account = AccountModel.users.get(user=user)
     list_projects = AccountProjectModel.projects.filter(users=account)
