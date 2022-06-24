@@ -63,15 +63,15 @@ def admin(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
     perm = prj_id.permissions.all()
+    user = request.user
+    current_account = AccountModel.users.get(user=user)
+    current_account_perm = prj_id.permissions.get(account=current_account)
     if request.method == 'POST':
         if "use" in request.POST:
             admin_form = EditAdminForm(id, request.POST)
             if admin_form.is_valid():
                 cd = admin_form.cleaned_data
                 choice_actions = cd['choice_actions']
-                user = request.user
-                current_account = AccountModel.users.get(user=user)
-                current_account_perm = prj_id.permissions.get(account=current_account)
                 if not current_account_perm.id == cd['perm_id'].id and current_account_perm.admin == "Чтение и запись":
                     if choice_actions == "admin":
                         permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
