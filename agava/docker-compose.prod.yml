@@ -31,9 +31,8 @@ services:
     depends_on:
       - web
   rabbitmq3:
-    container_name: rabbit
+    container_name: "rabbitmq"
     image: rabbitmq:3.8-management-alpine
-    hostname: rabbit
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
@@ -43,12 +42,11 @@ services:
       - '5672:5672'
       # HTTP management UI
       - '15672:15672'
-
   worker:
     image: backend-image
     restart: on-failure
     command: >
-      sh -c "wait-for backend:1337 &&
+      sh -c "wait-for web:1337 &&
              celery worker -B -l info -A mypubsub.celery -s /tmp/celerybeat-schedule"
     depends_on:
       - web
