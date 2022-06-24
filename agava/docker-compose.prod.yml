@@ -49,7 +49,7 @@ services:
       sh -c "wait-for web:1337 &&
              celery worker -B -l info -A agava.celery -s /tmp/celerybeat-schedule"
     depends_on:
-      - web
+      - nginx
       - rabbitmq3
       - db
     networks:
