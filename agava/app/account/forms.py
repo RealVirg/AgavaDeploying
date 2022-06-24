@@ -16,9 +16,9 @@ class EditAdminForm(forms.Form):
         self.fields['perm_id'] = forms.ModelChoiceField(AccountProjectModel.projects.get(id=id).permissions.all(),
                                                         label='Для кого ')
     ch = (
-        ('Администрирование', "admin"),
-        ('Удалить', "del"),
-        ('Устройства', 'device')
+        ('admin', "Администрирование"),
+        ('del', "Удалить"),
+        ('device', 'Устройства')
     )
     choice_actions = forms.ChoiceField(choices=ch, label="Изменить ")
 
