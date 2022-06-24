@@ -68,3 +68,6 @@ class AccountParameterModel(models.Model):
     device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
     modbus_register = models.OneToOneField(AccountModbusRegisterModel, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return self.name_parameter
+
