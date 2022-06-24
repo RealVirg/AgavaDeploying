@@ -63,11 +63,6 @@ class AddTagOPCForm(forms.Form):
 class AddParameterForm(forms.Form):
     name_parameter = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя параметра"}))
     type_parameter = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Тип параметра"}))
-    ch = (
-        ('read', "read"),
-        ('write', "write")
-    )
-    read_or_write = forms.ChoiceField(choices=ch, label='Чтение или запись? ')
 
 
 class DelParameterForm(forms.Form):
