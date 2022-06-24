@@ -47,7 +47,7 @@ services:
     restart: on-failure
     command: >
       sh -c "wait-for web:1337 &&
-             celery worker -B -l info -A mypubsub.celery -s /tmp/celerybeat-schedule"
+             celery worker -B -l info -A agava.celery -s /tmp/celerybeat-schedule"
     depends_on:
       - web
       - rabbitmq3
