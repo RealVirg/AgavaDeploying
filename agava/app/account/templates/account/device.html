@@ -23,12 +23,12 @@
         {% csrf_token %}
         {{ form_modbus.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="modbus" name="modbus"></p>
+        <p><input type="submit" value="Добавить параметр" name="modbus"></p>
 </form>
 <form class="del-par-form" method="post">
         {{ form_del.as_p }}
         {% csrf_token %}
-        <p><input type="submit" value="del" name="del"></p>
+        <p><input type="submit" value="Удалить" name="del"></p>
 </form>
 {% endif %}
 {% endblock %}

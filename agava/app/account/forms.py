@@ -69,5 +69,5 @@ class DelParameterForm(forms.Form):
     def __init__(self, id, *args, **kwargs):
         super(DelParameterForm, self).__init__(*args, **kwargs)
         self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
-            device=get_object_or_404(AccountDevicesModel, id=id)))
+            device=get_object_or_404(AccountDevicesModel, id=id)), label='Параметр для удаления')
 
