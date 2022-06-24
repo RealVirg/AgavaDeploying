@@ -25,10 +25,10 @@
   grid-column-end: 7;
   grid-row-start: 1;
 }
-.del-par-form{
+.del_par_form{
   display: none;
 }
-.create-modbus-reg-form{
+.create_modbus_reg_form{
   display: none;
 }
 .control_panel{

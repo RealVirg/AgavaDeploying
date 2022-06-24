@@ -40,8 +40,8 @@
         <button id="create_form_show" class="create_form_show" onclick="click()">Добавить параметр</button>
         <script>
             function click(){
-                var but = document.getElementById("create_form_show")
-                var form = document.getElementById("create-modbus-reg-form");
+                var but = document.getElementById("create_form_show");
+                var form = document.getElementById("id_create_form");
                 form.style.display = 'block';
                 but.style.display = 'none';
             }
@@ -49,21 +49,21 @@
         <button id="del_form_show" class="del_form_show" onclick="click1()">Удалить параметр</button>
         <script>
             function click1(){
-                var but = document.getElementById("del_form_show")
-                var form = document.getElementById("del-par-form");
+                var but = document.getElementById("del_form_show");
+                var form = document.getElementById("id_del_form");
                 form.style.display = 'block';
                 but.style.display = 'none';
             }
         </script>
         {% if device.type_device == "modbus-tcp" %}
-        <form class="create-modbus-reg-form" method="post" onchange="update()">
+        <form id="id_create_form" class="create_modbus_reg_form" method="post" onchange="update()">
                 {{ form.as_p }}
                 {% csrf_token %}
                 {{ form_modbus.as_p }}
                 {% csrf_token %}
                 <p><input type="submit" value="Добавить параметр" name="modbus"></p>
         </form>
-        <form class="del-par-form" method="post">
+        <form id="id_del_form" class="del_par_form" method="post">
                 {{ form_del.as_p }}
                 {% csrf_token %}
                 <p><input type="submit" value="Удалить" name="del"></p>
