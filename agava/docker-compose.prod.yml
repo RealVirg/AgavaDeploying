@@ -42,24 +42,8 @@ services:
       - '5672:5672'
       # HTTP management UI
       - '15672:15672'
-  worker:
-    image: backend-image
-    restart: on-failure
-    command: >
-      sh -c "wait-for web:1337 &&
-             celery worker -B -l info -A agava.celery -s /tmp/celerybeat-schedule"
-    depends_on:
-      - nginx
-      - rabbitmq3
-      - db
-    networks:
-      - shared_network
 
 volumes:
   postgres_data:
   static_volume:
   media_volume:
-
-networks:
-  shared_network:
-    driver: bridge
