@@ -102,7 +102,7 @@ def admin(request, id):
             admin_form = EditAdminForm(id)
         if "new" in request.POST:
             new_user = NewAdminUserForm(request.POST)
-            if new_user.is_valid():
+            if new_user.is_valid() and current_account_perm.admin == "Чтение и запись":
                 cd = new_user.cleaned_data
                 acc = AccountModel.users.get(user=get_user_model().objects.get(username=cd['new_user']))
                 item = AccountProjectModel.projects.get(id=id)
@@ -127,10 +127,15 @@ def devices(request, id):
     if not check_own_project(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
+    user = request.user
+    current_account = AccountModel.users.get(user=user)
+    current_account_perm = prj_id.permissions.get(account=current_account)
+    if current_account_perm.device == "Нет прав":
+        return redirect(project, id=prj_id.id)
     dvs = AccountDevicesModel.objects.filter(project=prj_id)
     if request.method == 'POST':
         create_form = CreateDeviceForm(request.POST)
-        if create_form.is_valid():
+        if create_form.is_valid() and current_account_perm.device == "Чтение и запись":
             cd = create_form.cleaned_data
             device = AccountDevicesModel(name_device=cd['name'], type_device=cd['type_device'], project=prj_id)
             device.save()
@@ -146,11 +151,19 @@ def device(request, id):
     device = get_object_or_404(AccountDevicesModel, id=id)
     prj = get_object_or_404(AccountProjectModel, id=device.project.id)
     params = AccountParameterModel.objects.filter(device=device)
+
+    user = request.user
+    current_account = AccountModel.users.get(user=user)
+    current_account_perm = prj.permissions.get(account=current_account)
+
+    if current_account_perm.device == "Нет прав":
+        return redirect(project, id=prj.id)
+
     if request.method == 'POST':
         form = AddParameterForm()
         if "del" in request.POST:
             form_del = DelParameterForm(id, request.POST)
-            if form_del.is_valid():
+            if form_del.is_valid() and current_account_perm.device == "Чтение и запись":
                 cd = form_del.cleaned_data
                 AccountParameterModel.objects.get(id=cd['parameter'].id).delete()
         else:
@@ -158,7 +171,7 @@ def device(request, id):
         if "modbus" in request.POST:
             form = AddParameterForm(request.POST)
             form_modbus = AddRegisterModbusForm(request.POST)
-            if form.is_valid() and form_modbus.is_valid():
+            if form.is_valid() and form_modbus.is_valid() and current_account_perm.device == "Чтение и запись":
                 cd = form.cleaned_data
                 cd1 = form_modbus.cleaned_data
                 param = AccountParameterModel(name_parameter=cd['name_parameter'],
