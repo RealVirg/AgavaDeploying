@@ -31,18 +31,37 @@ services:
     depends_on:
       - web
   rabbitmq3:
-    container_name: "rabbitmq"
+    container_name: rabbit
     image: rabbitmq:3.8-management-alpine
+    hostname: rabbit
     environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=/
     ports:
       # AMQP protocol port
       - '5672:5672'
       # HTTP management UI
       - '15672:15672'
 
+  worker:
+    image: backend-image
+    restart: on-failure
+    command: >
+      sh -c "wait-for backend:8080 &&
+             celery worker -B -l info -A mypubsub.celery -s /tmp/celerybeat-schedule"
+    depends_on:
+      - backend
+      - rabbit
+      - db
+    networks:
+      - shared_network
+
 volumes:
   postgres_data:
   static_volume:
   media_volume:
+
+networks:
+  shared_network:
+    driver: bridge

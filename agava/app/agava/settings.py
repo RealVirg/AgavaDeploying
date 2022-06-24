@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'accounts.apps.AccountsConfig',
     'mainpage.apps.MainpageConfig',
     'account.apps.AccountConfig',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -163,4 +163,5 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 
-CELERY_BROKER_URL = 'amqp://172.16.0.88'
+CELERY_BROKER_URL = 'amqp://admin:admin@rabbit:5672//'
+CELERY_RESULT_BACKEND = 'django-db'
