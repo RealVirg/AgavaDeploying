@@ -14,10 +14,11 @@
         <p><input type="submit" value="Create Project" class="create"></p>
     </form>
     <div class="projects">Проекты:</div>
-    {% for pr in list_projects %}
+
     <ul class="list-projects">
-        <li class="project"><a class="link" href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
+        {% for pr in list_projects %}
+            <li class="project"><a class="link" href="{{ pr.get_absolute_url }}">{{ pr.name_project }}</a></li>
+        {% endfor %}
     </ul>
-    {% endfor %}
 </div>
 {% endblock %}
