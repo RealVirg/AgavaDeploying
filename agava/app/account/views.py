@@ -100,11 +100,12 @@ def admin(request, id):
                 cd = new_user.cleaned_data
                 acc = AccountModel.users.get(user=get_user_model().objects.get(username=cd['new_user']))
                 item = AccountProjectModel.projects.get(id=id)
-                item.users.add(acc)
-                p = AccountPermissionsModel(account=acc)
-                p.save()
-                item.permissions.add(p)
-                item.save()
+                if len(item.users.filter(id=acc.id)) == 0:
+                    item.users.add(acc)
+                    p = AccountPermissionsModel(account=acc)
+                    p.save()
+                    item.permissions.add(p)
+                    item.save()
         else:
             new_user = NewAdminUserForm()
     else:
