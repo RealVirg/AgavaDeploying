@@ -1,51 +1,80 @@
 .admin_page{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    font-family: "Roboto", Helvetica, Arial, sans-serif;
-    grid-auto-rows: auto;
-  }
-  .control{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2; 
-  }
-  .add_new_user{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2; 
-  }
-  .permissions{
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 2;
-  }
-  
-  .new{
-      display: none;
-  }
-  .table_permissions {
-      border: 1px solid #69c;
-      border-collapse: separate;
-      empty-cells: hide;
-      width: 100%;
-   }
-  
-   .permission {
-     border: 2px solid #69c;
-     text-align: center;
-   }
-  
-  .control {
-    display: flex;
-  }
-  .new input[type='text']{
-    margin-right: 10px;
-  }
-  .control select {
-    margin-right: 10px;
-  }
-  #id_new_user {
-    width: 280px;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  grid-auto-rows: auto;
+}
+.control_panel{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2; 
+  display: flex;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+.add_new_user{
+margin-left: 30px;
+}
+.permissions{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+}
+
+.new{
+    display: none;
+}
+.table_permissions {
+    border: 1px solid #69c;
+    border-collapse: separate;
+    empty-cells: hide;
+    width: 100%;
+ }
+.but{
+margin-top: 15px;
+}
+ .permission {
+   border: 2px solid #69c;
+   text-align: center;
+ }
+
+.control {
+  display: flex;
+}
+.new input[type='text']{
+  margin-right: 10px;
+}
+.control select {
+  margin-right: 10px;
+  margin-top: 5px;
+}
+#id_new_user {
+  width: 280px;
+}
+input[type=submit]{
+border: 0px;
+background: blue;
+color: white;
+border-radius: 5px;
+font-weight:600;
+padding: 5px;
+padding-left: 20px;
+padding-right: 20px;
+}
+input[type=submit]:hover{
+background: darkblue;
+}
+.but{
+border: 0px;
+background: blue;
+color: white;
+border-radius: 5px;
+font-weight:600;
+padding: 5px;
+padding-left: 20px;
+padding-right: 20px;
+}
+.but:hover{
+background: darkblue;
+}

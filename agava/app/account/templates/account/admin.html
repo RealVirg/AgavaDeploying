@@ -9,7 +9,7 @@
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj_id.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<div class="admin_page">
+< class="admin_page">
     <div class="permissions">
         <table class="table_permissions">
             <tr>
@@ -26,26 +26,28 @@
             {% endfor %}
         </table>
     </div>
-    <form class="control" action="." method="post">
-            {{ admin_form.as_p }}
-            {% csrf_token %}
-            <p><input type="submit" value="Изменить" name="use"></p>
-    </form>
-    <div class="add_new_user">
-        <script>
-            function cli(){
-                var but = document.getElementById("id_but");
-                var form = document.getElementById("id_new_user_form");
-                form.style.display = 'flex';
-                but.style.display = 'none';
-            }
-        </script>
-        <button class="but" id="id_but" onclick="cli()">Добавить пользователя</button>
-        <form id="id_new_user_form" class="new" action="." method="post">
-                {{ new_user.as_p }}
+    <div class="control_panel">
+        <form class="control" action="." method="post">
+                {{ admin_form.as_p }}
                 {% csrf_token %}
-                <p><input type="submit" value="Добавить" name="new"></p>
+                <p><input type="submit" value="Изменить" name="use"></p>
         </form>
+        <div class="add_new_user">
+            <script>
+                function cli(){
+                    var but = document.getElementById("id_but");
+                    var form = document.getElementById("id_new_user_form");
+                    form.style.display = 'flex';
+                    but.style.display = 'none';
+                }
+            </script>
+            <button class="but" id="id_but" onclick="cli()">Добавить пользователя</button>
+            <form id="id_new_user_form" class="new" action="." method="post">
+                    {{ new_user.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Добавить" name="new"></p>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
