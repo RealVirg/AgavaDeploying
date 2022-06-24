@@ -24,11 +24,38 @@
   list-style: none;
   text-decoration: none;
 }
-.div a{
+.device{
+  display: block;
+  background: #3F51B5;
+  text-align: center;
+  color: white;
   text-decoration: none;
-  color: gray
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
-.div a:hover{
-  text-decoration: none;
-  color: black
+.device:hover{
+  background: darkblue;
+}
+input[type=submit]{
+border: 0px;
+background: blue;
+color: white;
+margin-top: 3px;
+border-radius: 5px;
+font-weight:600;
+padding: 5px;
+padding-left: 20px;
+padding-right: 20px;
+}
+input[type=submit]:hover{
+background: darkblue;
+}
+
+.create-device-form select,
+.create-device-form input[type=text] {
+  margin-right: 10px;
+  margin-top: 5px;
 }
