@@ -11,8 +11,8 @@
 {% block content %}
 <div class="device_page">
     <div class="device_detail">
-        <div class="name_device">{{ device.name_device }}</div>
-        <div class="type_device">{{ device.type_device }}</div>
+        <div class="name_device">Устройство: <strong>{{ device.name_device }}</strong></div>
+        <div class="type_device">Тип: <strong>{{ device.type_device }}</strong></div>
     </div>
     <table class="table_param">
         <tr>
@@ -36,38 +36,42 @@
         </tr>
         {% endfor %}
     </table>
-    <div class="control-panel">
-        <button id="create_form_show" class="create_form_show" onclick="click()">Добавить параметр</button>
-        <script>
-            function click(){
-                var but = document.getElementById("create_form_show");
-                var form = document.getElementById("id_create_form");
-                form.style.display = 'block';
-                but.style.display = 'none';
-            }
-        </script>
-        <button id="del_form_show" class="del_form_show" onclick="click1()">Удалить параметр</button>
-        <script>
-            function click1(){
-                var but = document.getElementById("del_form_show");
-                var form = document.getElementById("id_del_form");
-                form.style.display = 'block';
-                but.style.display = 'none';
-            }
-        </script>
-        {% if device.type_device == "modbus-tcp" %}
-        <form id="id_create_form" class="create_modbus_reg_form" method="post" onchange="update()">
-                {{ form.as_p }}
-                {% csrf_token %}
-                {{ form_modbus.as_p }}
-                {% csrf_token %}
-                <p><input type="submit" value="Добавить параметр" name="modbus"></p>
-        </form>
-        <form id="id_del_form" class="del_par_form" method="post">
-                {{ form_del.as_p }}
-                {% csrf_token %}
-                <p><input type="submit" value="Удалить" name="del"></p>
-        </form>
+    <div class="control_panel">
+        <div class="create">
+            <button id="create_form_show" class="create_form_show" onclick="click2()">Добавить параметр</button>
+            <script>
+                function click2(){
+                    var but = document.getElementById("create_form_show");
+                    var form = document.getElementById("id_create_form");
+                    form.style.display = 'block';
+                    but.style.display = 'none';
+                }
+            </script>
+            {% if device.type_device == "modbus-tcp" %}
+            <form id="id_create_form" class="create_modbus_reg_form" method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    {{ form_modbus.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Добавить параметр" name="modbus"></p>
+            </form>
+        </div>
+        <div class="del">
+            <button id="del_form_show" class="del_form_show" onclick="click1()">Удалить параметр</button>
+            <script>
+                function click1(){
+                    var but = document.getElementById("del_form_show");
+                    var form = document.getElementById("id_del_form");
+                    form.style.display = 'block';
+                    but.style.display = 'none';
+                }
+            </script>
+            <form id="id_del_form" class="del_par_form" method="post">
+                    {{ form_del.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Удалить" name="del"></p>
+            </form>
+        </div>
         {% endif %}
     </div>
 </div>
