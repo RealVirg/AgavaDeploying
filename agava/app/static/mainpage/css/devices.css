@@ -11,12 +11,8 @@
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
+  border-bottom: 1px solid;
 }
-.create-device-form input[type='text'],
-.create-device-form select{
-    margin-right: 10px;
-}
-
 .list-div{
   grid-column-start: 1;
   grid-column-end: 4;
