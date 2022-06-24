@@ -48,11 +48,11 @@ services:
     image: backend-image
     restart: on-failure
     command: >
-      sh -c "wait-for backend:8080 &&
+      sh -c "wait-for backend:1337 &&
              celery worker -B -l info -A mypubsub.celery -s /tmp/celerybeat-schedule"
     depends_on:
-      - backend
-      - rabbit
+      - web
+      - rabbitmq3
       - db
     networks:
       - shared_network
