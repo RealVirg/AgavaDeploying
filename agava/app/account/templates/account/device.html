@@ -8,14 +8,30 @@
 {% endblock %}
 {% block content %}
 <div class="info-device">
-    {{ device.name_device }} , {{ device.type_device }}
-    <ul class="list-param">
+    <div class="name_device">{{ device.name_device }}</div>
+    <div class="type_device">{{ device.type_device }}</div>
+    <table class="table_param">
+        <tr>
+            <th class="param">Имя</th>
+            <th class="param">Тип</th>
+            <th class="param">Номер устройства</th>
+            <th class="param">Номер функции чтения</th>
+            <th class="param">Адрес чтения</th>
+            <th class="param">Номер функции записи</th>
+            <th class="param">Адрес записи</th>
+        </tr>
         {% for param in params %}
-        <li class="param">
-            {{ param }}
-        </li>
+        <tr>
+            <td class="param">{{ param.name_parameter }}</td>
+            <td class="param">{{ param.type_parameter }}</td>
+            <td class="param">{{ param.modbus_register.number_device }}</td>
+            <td class="param">{{ param.modbus_register.number_function_read }}</td>
+            <td class="param">{{ param.modbus_register.address_read }}</td>
+            <td class="param">{{ param.modbus_register.number_function_write }}</td>
+            <td class="param">{{ param.modbus_register.address_write }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 </div>
 {% if device.type_device == "modbus-tcp" %}
 <form class="create-modbus-reg-form" method="post" onchange="update()">
