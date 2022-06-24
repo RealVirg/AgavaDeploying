@@ -69,29 +69,32 @@ def admin(request, id):
             if admin_form.is_valid():
                 cd = admin_form.cleaned_data
                 choice_actions = cd['choice_actions']
-                if choice_actions == "admin":
-                    permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
-                    if permm.admin == "Чтение и запись":
-                        permm.admin = "Чтение"
-                    elif permm.admin == "Чтение":
-                        permm.admin = "Нет прав"
-                    else:
-                        permm.admin = "Чтение и запись"
-                    permm.save()
-                if choice_actions == "device":
-                    permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
-                    if permm.device == "Чтение и запись":
-                        permm.device = "Чтение"
-                    elif permm.device == "Чтение":
-                        permm.device = "Нет прав"
-                    else:
-                        permm.device = "Чтение и запись"
-                    permm.save()
-                if choice_actions == "del":
-                    permm = AccountProjectModel.projects.get(id=id).permissions.get(id=cd['perm_id'].id)
-                    AccountProjectModel.projects.get(id=id).permissions.remove(permm)
-                    acc = AccountProjectModel.projects.get(id=id).users.get(id=cd['perm_id'].account.id)
-                    AccountProjectModel.projects.get(id=id).users.remove(acc)
+                user = request.user
+                current_account = AccountModel.users.get(user=user)
+                if not current_account.id == cd['perm_id'.id]:
+                    if choice_actions == "admin":
+                        permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
+                        if permm.admin == "Чтение и запись":
+                            permm.admin = "Чтение"
+                        elif permm.admin == "Чтение":
+                            permm.admin = "Нет прав"
+                        else:
+                            permm.admin = "Чтение и запись"
+                        permm.save()
+                    if choice_actions == "device":
+                        permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
+                        if permm.device == "Чтение и запись":
+                            permm.device = "Чтение"
+                        elif permm.device == "Чтение":
+                            permm.device = "Нет прав"
+                        else:
+                            permm.device = "Чтение и запись"
+                        permm.save()
+                    if choice_actions == "del":
+                        permm = AccountProjectModel.projects.get(id=id).permissions.get(id=cd['perm_id'].id)
+                        AccountProjectModel.projects.get(id=id).permissions.remove(permm)
+                        acc = AccountProjectModel.projects.get(id=id).users.get(id=cd['perm_id'].account.id)
+                        AccountProjectModel.projects.get(id=id).users.remove(acc)
         else:
             admin_form = EditAdminForm(id)
         if "new" in request.POST:
