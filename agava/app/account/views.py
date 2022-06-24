@@ -71,10 +71,8 @@ def admin(request, id):
                 choice_actions = cd['choice_actions']
                 user = request.user
                 current_account = AccountModel.users.get(user=user)
-                logging.warning(current_account)
-                logging.warning(prj_id.permissions.get(account=current_account).id)
-                logging.warning(cd['perm_id'].id)
-                if not prj_id.permissions.get(account=current_account).id == cd['perm_id'].id:
+                current_account_perm = prj_id.permissions.get(account=current_account)
+                if not current_account_perm.id == cd['perm_id'].id and current_account_perm.admin == "Чтение и запись":
                     if choice_actions == "admin":
                         permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
                         if permm.admin == "Чтение и запись":
