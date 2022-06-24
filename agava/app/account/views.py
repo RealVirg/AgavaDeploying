@@ -29,8 +29,8 @@ def account(request):
         form = CreateProjectForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            account_permissions = AccountPermissionsModel(account=account, admin="Чтение и и запись",
-                                                          device="Чтение и и запись")
+            account_permissions = AccountPermissionsModel(account=account, admin="Чтение и запись",
+                                                          device="Чтение и запись")
             account_permissions.save()
             pr = AccountProjectModel(name_project=cd['name'])
             pr.save()

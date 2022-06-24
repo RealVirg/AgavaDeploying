@@ -29,7 +29,7 @@
     <form class="control" action="." method="post">
             {{ admin_form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" value="use" name="use"></p>
+            <p><input type="submit" value="Изменить" name="use"></p>
     </form>
     <div class="add_new_user">
         <script>
@@ -44,7 +44,7 @@
         <form id="id_new_user_form" class="new" action="." method="post">
                 {{ new_user.as_p }}
                 {% csrf_token %}
-                <p><input type="submit" value="new" name="new"></p>
+                <p><input type="submit" value="Добавить" name="new"></p>
         </form>
     </div>
 </div>
