@@ -67,7 +67,7 @@ def admin(request, id):
     current_account = AccountModel.users.get(user=user)
     current_account_perm = prj_id.permissions.get(account=current_account)
     if current_account_perm.admin == "Нет прав":
-        return redirect(account)
+        return redirect(project, id=prj_id.id)
     if request.method == 'POST':
         if "use" in request.POST:
             admin_form = EditAdminForm(id, request.POST)
