@@ -14,9 +14,9 @@ class AccountModel(models.Model):
 
 class AccountPermissionsModel(models.Model):
     account = models.ForeignKey(AccountModel, on_delete=models.CASCADE, null=True)
-    admin = models.BooleanField(default=True)
-    device = models.BooleanField(default=True)
-    tables = models.BooleanField(default=True)
+    admin = models.CharField(default='Нет прав')  # Чтение и запись, Чтение, Нет прав
+    device = models.CharField(default='Нет прав')
+    tables = models.CharField(default='Нет прав')
 
     def __str__(self):
         return self.account.user.username

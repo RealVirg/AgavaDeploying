@@ -29,7 +29,8 @@ def account(request):
         form = CreateProjectForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            account_permissions = AccountPermissionsModel(account=account)
+            account_permissions = AccountPermissionsModel(account=account, admin="Чтение и и запись",
+                                                          device="Чтение и и запись")
             account_permissions.save()
             pr = AccountProjectModel(name_project=cd['name'])
             pr.save()
@@ -62,7 +63,7 @@ def admin(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
     perm = prj_id.permissions.all()
-    if request.method == 'POST' and prj_id.permissions.get(account=AccountModel.users.get(user=request.user)).admin:
+    if request.method == 'POST':
         if "use" in request.POST:
             admin_form = EditAdminForm(id, request.POST)
             if admin_form.is_valid():
@@ -70,11 +71,21 @@ def admin(request, id):
                 choice_actions = cd['choice_actions']
                 if choice_actions == "admin":
                     permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
-                    permm.admin = not permm.admin
+                    if permm.admin == "Чтение и запись":
+                        permm.admin = "Чтение"
+                    elif permm.admin == "Чтение":
+                        permm.admin = "Нет прав"
+                    else:
+                        permm.admin = "Чтение и запись"
                     permm.save()
                 if choice_actions == "device":
                     permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
-                    permm.device = not permm.device
+                    if permm.device == "Чтение и запись":
+                        permm.device = "Чтение"
+                    elif permm.device == "Чтение":
+                        permm.device = "Нет прав"
+                    else:
+                        permm.device = "Чтение и запись"
                     permm.save()
                 if choice_actions == "del":
                     permm = AccountProjectModel.projects.get(id=id).permissions.get(id=cd['perm_id'].id)
@@ -110,7 +121,7 @@ def devices(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
     dvs = AccountDevicesModel.objects.filter(project=prj_id)
-    if request.method == 'POST' and prj_id.permissions.get(account=AccountModel.users.get(user=request.user)).device:
+    if request.method == 'POST':
         create_form = CreateDeviceForm(request.POST)
         if create_form.is_valid():
             cd = create_form.cleaned_data
