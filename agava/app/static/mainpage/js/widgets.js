@@ -101,14 +101,14 @@ function f(csv){
               .y(function(d) { return y(d.value) })
           )
         });
-        .on('mouseover', function(){
-
-        })
-        .on('mousemove', function(){
-
-        })
-        .on('mouseout', function(){
-
-        });
+//        .on('mouseover', function(){
+//
+//        })
+//        .on('mousemove', function(){
+//
+//        })
+//        .on('mouseout', function(){
+//
+//        });
     })
 }
