@@ -52,7 +52,7 @@ def project(request, id):
     if not check_own_project(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
-    with open("static/main/csv/test.csv", 'r') as f:
+    with open("static/mainpage/csv/test.csv", 'r') as f:
         logging.warning(f.readline())
     return render(request,
                   'account/project.html',
