@@ -90,6 +90,25 @@ function f(csv, target, wdth, hght){
               )
         }
 
+        var bisect = d3.bisector(function(d) { return d.x; }).left;
+
+        // Create the circle that travels along the curve of chart
+        var focus = svg
+          .append('g')
+          .append('circle')
+            .style("fill", "none")
+            .attr("stroke", "black")
+            .attr('r', 8.5)
+            .style("opacity", 0)
+
+        // Create the text that travels along the curve of chart
+        var focusText = svg
+          .append('g')
+          .append('text')
+            .style("opacity", 0)
+            .attr("text-anchor", "left")
+            .attr("alignment-baseline", "middle")
+
         svg.on("dblclick",function(){
           x.domain(d3.extent(data, function(d) { return d.date; }))
           xAxis.transition().call(d3.axisBottom(x))
@@ -104,9 +123,19 @@ function f(csv, target, wdth, hght){
 //        .on('mouseover', function(){
 //
 //        })
-//        .on('mousemove', function(){
-//
-//        })
+        .on('mousemove', function(event, d){
+            var x0 = x.invert(event.x);
+            var i = bisect(data, x0, 1);
+            selectedData = data[i]
+            console.log(i);
+            focus
+              .attr("cx", x(selectedData.x))
+              .attr("cy", y(selectedData.y))
+            focusText
+              .html("x:" + selectedData.x + "  -  " + "y:" + selectedData.y)
+              .attr("x", x(selectedData.x)+15)
+              .attr("y", y(selectedData.y))
+           });
 //        .on('mouseout', function(){
 //
 //        });
