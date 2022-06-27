@@ -119,7 +119,7 @@ function f(csv, target, wdth, hght){
               .x(function(d) { return x(d.date) })
               .y(function(d) { return y(d.value) })
           )
-        });
+        })
 //        .on('mouseover', function(){
 //
 //        })
