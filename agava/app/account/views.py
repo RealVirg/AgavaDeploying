@@ -60,7 +60,7 @@ def project(request, id):
     if not check_own_project(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
-    history = prj_id.account.all()
+    history = prj_id.history_project.all()
     return render(request,
                   'account/project.html',
                   {'prj_id': prj_id,
