@@ -27,7 +27,7 @@ function pd_chart(csv, target, wdth, hght){
         .call(d3.axisBottom(x));
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function(d) { return +d.value; })])
+        .domain([d3.min(data, function(d){return +d.value}), d3.max(data, function(d) { return +d.value; })])
         .range([ height, 0 ]);
       yAxis = svg.append("g")
         .call(d3.axisLeft(y));
