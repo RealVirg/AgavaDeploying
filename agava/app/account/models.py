@@ -79,5 +79,5 @@ class AccountHistoryModel(models.Model):
 
     def __str__(self):
         tz = timezone.get_default_timezone()
-        return ''.format(self.date.astimezone(tz).strftime('%Y-%m-%d %H:%M:%s'))
+        return '{}'.format(self.date.astimezone(tz).strftime('%Y-%m-%d %H:%M:%s'))
 
