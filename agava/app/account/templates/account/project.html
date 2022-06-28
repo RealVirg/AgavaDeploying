@@ -2,6 +2,8 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/project.css' %}">
 {% endblock %}
 
 {% block header %}
@@ -10,18 +12,25 @@
 {% endblock %}
 
 {% block content %}
-<script src="https://d3js.org/d3.v4.js"></script>
-<div id="chart"></div>
-<div id="chart2"></div>
-{% load static %}
-<script src="{% static 'mainpage/js/widgets_v4.js' %}"></script>
-<script>
-    date_value_chart("/static/mainpage/csv/test.csv", "#chart", 1000, 400);
-    pvalue1_value2_chart("/static/mainpage/csv/test2.csv", "#chart2", 1000, 400);
-</script>
-<ul class="history">
-    {% for sh in history %}
-    <li class="str_history">{{ sh }}</li>
-    {% endfor %}
-</ul>
+<!--<script src="https://d3js.org/d3.v4.js"></script>-->
+<!--<div id="chart"></div>-->
+<!--<div id="chart2"></div>-->
+<!--{% load static %}-->
+<!--<script src="{% static 'mainpage/js/widgets_v4.js' %}"></script>-->
+<!--<script>-->
+<!--    date_value_chart("/static/mainpage/csv/test.csv", "#chart", 1000, 400);-->
+<!--    pvalue1_value2_chart("/static/mainpage/csv/test2.csv", "#chart2", 1000, 400);-->
+<!--</script>-->
+<div class="project_page">
+    <div class="hist_and_event">
+        <ul class="history">
+            {% for sh in history %}
+            <li class="str_history">{{ sh }}</li>
+            {% endfor %}
+        </ul>
+        <ul class="events">
+
+        </ul>
+    </div>
+</div>
 {% endblock %}
