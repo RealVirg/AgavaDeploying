@@ -21,6 +21,13 @@ def check_own_project(request, project_id):
     return True
 
 
+def write_history_str(pr, strin, acc):
+    history_str = AccountHistoryModel(action=acc.user.username + ": " + strin)
+    history_str.save()
+    pr.history_project.add(history_str)
+    pr.save()
+
+
 @login_required
 def account(request):
     user = request.user
@@ -37,9 +44,7 @@ def account(request):
             pr.save()
             pr.permissions.add(account_permissions)
             pr.users.add(account)
-            pr.save()
-            history_str = AccountHistoryModel(action="Создано устройство: " + cd['name'])
-            history_str.save()
+            write_history_str(pr, "Создан проект " + cd['name'], account)
     else:
         form = CreateProjectForm()
     return render(request,
@@ -55,9 +60,11 @@ def project(request, id):
     if not check_own_project(request, id):
         return redirect(account)
     prj_id = get_object_or_404(AccountProjectModel, id=id)
+    history = prj_id.account.all()
     return render(request,
                   'account/project.html',
-                  {'prj_id': prj_id})
+                  {'prj_id': prj_id,
+                   'history': history})
 
 
 @login_required
@@ -82,25 +89,41 @@ def admin(request, id):
                         permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
                         if permm.admin == "Чтение и запись":
                             permm.admin = "Чтение"
+                            write_history_str(prj_id, "Права администрации " + permm.account.user.username + " изменены на Чтение", current_account)
                         elif permm.admin == "Чтение":
                             permm.admin = "Нет прав"
+                            write_history_str(prj_id, "Права администрации " + permm.account.user.username + " изменены на Нет прав",
+                                              current_account)
                         else:
                             permm.admin = "Чтение и запись"
+                            write_history_str(prj_id, "Права администрации " + permm.account.user.username + " изменены на Чтение и запись",
+                                              current_account)
                         permm.save()
                     if choice_actions == "device":
                         permm = AccountPermissionsModel.objects.get(id=cd['perm_id'].id)
                         if permm.device == "Чтение и запись":
                             permm.device = "Чтение"
+                            write_history_str(prj_id,
+                                              "Права на управление устройствами " + permm.account.user.username + " изменены на Чтение",
+                                              current_account)
                         elif permm.device == "Чтение":
                             permm.device = "Нет прав"
+                            write_history_str(prj_id,
+                                              "Права на управление устройствами " + permm.account.user.username + " изменены на Нет прав",
+                                              current_account)
                         else:
                             permm.device = "Чтение и запись"
+                            write_history_str(prj_id,
+                                              "Права на управление устройствами " + permm.account.user.username + " изменены на Чтение и запись",
+                                              current_account)
                         permm.save()
                     if choice_actions == "del":
                         permm = AccountProjectModel.projects.get(id=id).permissions.get(id=cd['perm_id'].id)
                         AccountProjectModel.projects.get(id=id).permissions.remove(permm)
                         acc = AccountProjectModel.projects.get(id=id).users.get(id=cd['perm_id'].account.id)
                         AccountProjectModel.projects.get(id=id).users.remove(acc)
+                        write_history_str(prj_id, permm.account.user.username + " удален из проекта",
+                                          current_account)
         else:
             admin_form = EditAdminForm(id)
         if "new" in request.POST:

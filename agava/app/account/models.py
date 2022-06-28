@@ -4,6 +4,15 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+class AccountHistoryModel(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    action = models.CharField(default="nothing", max_length=1000)
+
+    def __str__(self):
+        tz = timezone.get_default_timezone()
+        return '{}: '.format(self.date.astimezone(tz).strftime('%H:%M %Y-%m-%d')) + str(self.action)
+
+
 class AccountModel(models.Model):
     User = get_user_model()
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -28,6 +37,7 @@ class AccountProjectModel(models.Model):
     name_project = models.CharField(max_length=200, default='Project', help_text="Project")
     projects = models.Manager()
     permissions = models.ManyToManyField(AccountPermissionsModel, related_name='perm')
+    history_project = models.ManyToManyField(AccountHistoryModel, related_name="history")
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'id': self.id})
@@ -71,13 +81,4 @@ class AccountParameterModel(models.Model):
 
     def __str__(self):
         return self.name_parameter
-
-
-class AccountHistoryModel(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    action = models.CharField(default="nothing", max_length=1000)
-
-    def __str__(self):
-        tz = timezone.get_default_timezone()
-        return '{}'.format(self.date.astimezone(tz).strftime('%Y-%m-%d %H:%M:%s'))
 
