@@ -23,11 +23,12 @@ function pd_chart(csv, target, wdth, hght){
         .domain(d3.extent(data, function(d) { return d.date; }))
         .range([ 0, width ]);
       xAxis = svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + height/2 + ")")
         .call(d3.axisBottom(x));
 
       var y = d3.scaleLinear()
-        .domain([d3.min(data, function(d){return +d.value}), d3.max(data, function(d) { return +d.value; })])
+        .domain([-d3.max(data, function(d){return Math.abs(+d.value)}),
+        d3.max(data, function(d) { return Math.abs(+d.value); })])
         .range([ height, 0 ]);
       yAxis = svg.append("g")
         .call(d3.axisLeft(y));
