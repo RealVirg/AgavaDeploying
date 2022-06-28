@@ -134,6 +134,9 @@ def admin(request, id):
                 item = AccountProjectModel.projects.get(id=id)
                 if len(item.users.filter(id=acc.id)) == 0:
                     item.users.add(acc)
+                    write_history_str(prj_id,
+                                      "Добавлен " + acc.user.username + " в проект.",
+                                      current_account)
                     p = AccountPermissionsModel(account=acc)
                     p.save()
                     item.permissions.add(p)

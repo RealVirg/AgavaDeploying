@@ -10,7 +10,7 @@ class AccountHistoryModel(models.Model):
 
     def __str__(self):
         tz = timezone.get_default_timezone()
-        return '{}: '.format(self.date.astimezone(tz).strftime('%H:%M %Y-%m-%d')) + str(self.action)
+        return '{} '.format(self.date.astimezone(tz).strftime('%H:%M %Y-%m-%d')) + str(self.action)
 
 
 class AccountModel(models.Model):
