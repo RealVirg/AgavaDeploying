@@ -4,7 +4,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
-                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel, AccountParameterOPDModel)
+                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel,
+                     AccountHistoryModel, AccountParameterOPDModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
                     AddParameterOPDForm, AddTagOPCForm, AddParameterForm, DelParameterForm)
 from django.shortcuts import redirect
@@ -37,6 +38,8 @@ def account(request):
             pr.permissions.add(account_permissions)
             pr.users.add(account)
             pr.save()
+            history_str = AccountHistoryModel(action="Создано устройство: " + cd['name'])
+            history_str.save()
     else:
         form = CreateProjectForm()
     return render(request,
