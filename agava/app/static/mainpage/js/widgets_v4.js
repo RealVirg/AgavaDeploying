@@ -22,7 +22,7 @@ function date_value_chart(csv, target, wdth, hght){
       var x = d3.scaleTime()
         .domain(d3.extent(data, function(d) { return d.date; }))
         .range([ 0, width ]);
-      xAxis = svg.append("g")
+      xAxiss = svg.append("g")
         .attr("transform", "translate(0," + height/2 + ")")
         .call(d3.axisBottom(x));
 
@@ -79,7 +79,7 @@ function date_value_chart(csv, target, wdth, hght){
           line.select(".brush").call(brush.move, null)
         }
 
-        xAxis.transition().duration(1000).call(d3.axisBottom(x))
+        xAxiss.transition().duration(1000).call(d3.axisBottom(x))
         line
             .select('.line')
             .transition()
@@ -120,7 +120,7 @@ function date_value_chart(csv, target, wdth, hght){
 
       svg.on("dblclick",function(){
         x.domain(d3.extent(data, function(d) { return d.date; }))
-        xAxis.transition().call(d3.axisBottom(x))
+        xAxiss.transition().call(d3.axisBottom(x))
         line
           .select('.line')
           .transition()
