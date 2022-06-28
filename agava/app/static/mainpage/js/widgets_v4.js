@@ -176,7 +176,7 @@ function date_value_chart(csv, target, wdth, hght){
   })
 }
 
-function value1_value2_chart(csv, target, wdth, hght){
+function pvalue1_value2_chart(csv, target, wdth, hght) { // value1 must be possitive
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
       width = wdth - margin.left - margin.right,
       height = hght - margin.top - margin.bottom;
@@ -261,6 +261,7 @@ function value1_value2_chart(csv, target, wdth, hght){
 
         if(!extent){
           if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
+          x.domain([ 4,8])
         }else{
           x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
           line.select(".brush").call(brush.move, null)
