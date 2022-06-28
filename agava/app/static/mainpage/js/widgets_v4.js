@@ -135,8 +135,8 @@ function pd_chart(csv, target, wdth, hght){
             focusText.style("opacity",1)
          })
          .on('mousemove', function(){
-          var x0 = x.invert(d3.mouse(this)[0]);
-          var i = bisect(data, x0, 1);
+          var x0 = x.invert(Math.round(d3.mouse(this)[0]));
+          var i = bisect(data, x0);
           selectedData = data[i];
           format = d3.timeFormat("%Y-%m-%d");
           var change_location_x = 15;
@@ -168,7 +168,7 @@ function pd_chart(csv, target, wdth, hght){
          .on('mouseout', function(){
           foc.style("opacity", 0)
           focus.style("opacity", 0)
-          focus.style("opacity", 0)
+          focus1.style("opacity", 0)
           focusText.style("opacity", 0)
          });
 
