@@ -197,6 +197,18 @@ function value1_value2_chart(csv, target, wdth, hght){
 
     function(data) {
 
+      function compare(a, b) {
+        if  (a.x < b.x){
+          return -1;
+        }
+        if (a.x > b.x){
+          return 1;
+        }
+        return 0;
+      }
+
+      data.sort(compare);
+
       var x = d3.scaleLinear()
         .domain([-d3.max(data, function(d){return Math.abs(+d.x)}), d3.max(data, function(d) { return Math.abs(+d.x); })])
         .range([ 0, width ]);
