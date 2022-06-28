@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import timezone, dateformat
 
 
 class AccountModel(models.Model):
@@ -78,6 +78,5 @@ class AccountHistoryModel(models.Model):
     action = models.CharField(default="nothing", max_length=1000)
 
     def __str__(self):
-        tz = timezone.get_default_timezone()
-        return "{}".format(self.date.astimezone(tz).strftime('%d.%m.%Y %H:%M'))
+        return self.date
 
