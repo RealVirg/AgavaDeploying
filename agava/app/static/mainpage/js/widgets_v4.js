@@ -128,7 +128,7 @@ function pd_chart(csv, target, wdth, hght){
          })
          .on('mousemove', function(){
           var x0 = x.invert(d3.mouse(this)[0]);
-          var i = bisect(data, x0, 1);
+          var i = bisect(data, x0, 0);
           selectedData = data[i];
           format = d3.timeFormat("%Y-%m-%d");
           var change_location_x = 15;
