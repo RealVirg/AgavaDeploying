@@ -12,9 +12,11 @@
 {% block content %}
 <script src="https://d3js.org/d3.v4.js"></script>
 <div id="chart"></div>
+<div id="chart2"></div>
 {% load static %}
 <script src="{% static 'mainpage/js/widgets_v4.js' %}"></script>
 <script>
-    value1_value2_chart("/static/mainpage/csv/test2.csv", "#chart", 1000, 400);
+    date_value_chart("/static/mainpage/csv/test.csv", "#chart", 1000, 400);
+    value1_value2_chart("/static/mainpage/csv/test2.csv", "#chart2", 1000, 400);
 </script>
 {% endblock %}

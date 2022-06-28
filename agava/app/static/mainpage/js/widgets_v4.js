@@ -196,7 +196,6 @@ function value1_value2_chart(csv, target, wdth, hght){
     },
 
     function(data) {
-
       function compare(a, b) {
         if  (parseInt(a.x) < parseInt(b.x)){
           return -1;
@@ -210,7 +209,7 @@ function value1_value2_chart(csv, target, wdth, hght){
       data.sort(compare);
 
       var x = d3.scaleLinear()
-        .domain([-d3.max(data, function(d){return Math.abs(+d.x)}), d3.max(data, function(d) { return Math.abs(+d.x); })])
+        .domain([0, d3.max(data, function(d) { return Math.abs(+d.x); })])
         .range([ 0, width ]);
       xAxis = svg.append("g")
         .attr("transform", "translate(0," + height/2 + ")")
@@ -220,7 +219,6 @@ function value1_value2_chart(csv, target, wdth, hght){
         .domain([-d3.max(data, function(d){return Math.abs(+d.y)}), d3.max(data, function(d) { return Math.abs(+d.y); })])
         .range([ height, 0 ]);
       yAxis = svg.append("g")
-        .attr("transform", "translate("+ width/2 +",0)")
         .call(d3.axisLeft(y));
 
       var clip = svg.append("defs").append("svg:clipPath")
@@ -263,7 +261,6 @@ function value1_value2_chart(csv, target, wdth, hght){
 
         if(!extent){
           if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
-          x.domain([ 4,8])
         }else{
           x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
           line.select(".brush").call(brush.move, null)
@@ -309,7 +306,7 @@ function value1_value2_chart(csv, target, wdth, hght){
         .attr("alignment-baseline", "middle")
 
       svg.on("dblclick",function(){
-        x.domain(d3.extent(data, function(d) { return d.x; }))
+        x.domain([0, d3.max(data, function(d) { return Math.abs(+d.x); })])
         xAxis.transition().call(d3.axisBottom(x))
         line
           .select('.line')
@@ -331,6 +328,7 @@ function value1_value2_chart(csv, target, wdth, hght){
           selectedData = data[i];
           var change_location_x = 15;
           var change_location_y = -10;
+          console.log(data)
           if (x(selectedData.x) > (width / 2)){
               change_location_x = -220;
             }
