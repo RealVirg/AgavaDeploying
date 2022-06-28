@@ -132,8 +132,12 @@ function pd_chart(csv, target, wdth, hght){
           selectedData = data[i];
           format = d3.timeFormat("%Y-%m-%d");
           var change_location_x = 15;
+          var change_location_y = -10;
           if (x(selectedData.date) > (width / 2)){
               change_location_x = -220;
+            }
+          if (y(selectedData.value) > (height / 2)){
+              change_location_y = 10;
             }
           foc
             .attr("x1", 0)
@@ -148,7 +152,7 @@ function pd_chart(csv, target, wdth, hght){
           focusText
             .html("Date:" + format(selectedData.date) + "  -  " + "Value:" + selectedData.value)
             .attr("x", x(selectedData.date)+change_location_x)
-            .attr("y", y(selectedData.value)-10);
+            .attr("y", y(selectedData.value)-change_location_y);
          })
          .on('mouseout', function(){
           foc.style("opacity", 0)
