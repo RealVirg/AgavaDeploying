@@ -1,4 +1,4 @@
-function pd_chart(csv, target, wdth, hght){
+function f(csv, target, wdth, hght){
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
       width = wdth - margin.left - margin.right,
       height = hght - margin.top - margin.bottom;
@@ -96,6 +96,13 @@ function pd_chart(csv, target, wdth, hght){
         .style("fill", "none")
         .attr("stroke", "black")
         .style("opacity", 0)
+    var focus1 = svg
+    .append('g')
+    .append('circle')
+      .style("fill", "black")
+      .attr("stroke", "black")
+      .attr('r', 4.5)
+      .style("opacity", 0)
     var foc = svg
       .append('g')
       .append('line')
@@ -124,11 +131,12 @@ function pd_chart(csv, target, wdth, hght){
         .on('mouseover', function(){
             foc.style("opacity", 1)
             focus.style("opacity", 1)
+            focus1.style("opacity", 1)
             focusText.style("opacity",1)
          })
          .on('mousemove', function(){
           var x0 = x.invert(d3.mouse(this)[0]);
-          var i = bisect(data, x0, 0);
+          var i = bisect(data, x0, 1);
           selectedData = data[i];
           format = d3.timeFormat("%Y-%m-%d");
           var change_location_x = 15;
@@ -139,15 +147,18 @@ function pd_chart(csv, target, wdth, hght){
           if (y(selectedData.value) > (height / 2)){
               change_location_y = 10;
             }
+          focus1
+            .attr("cx", x(selectedData.date))
+            .attr("cy", y(selectedData.value));
           foc
             .attr("x1", 0)
             .attr("y1", y(selectedData.value))
             .attr("x2", width)
             .attr("y2", y(selectedData.value));
           focus
-            .attr("x1", x(selectedData.date))
+            .attr("x1", x(selectedData.date)-1)
             .attr("y1", 0)
-            .attr("x2", x(selectedData.date))
+            .attr("x2", x(selectedData.date)-1)
             .attr("y2", height);
           focusText
             .html("Date:" + format(selectedData.date) + "  -  " + "Value:" + selectedData.value)
@@ -156,6 +167,7 @@ function pd_chart(csv, target, wdth, hght){
          })
          .on('mouseout', function(){
           foc.style("opacity", 0)
+          focus.style("opacity", 0)
           focus.style("opacity", 0)
           focusText.style("opacity", 0)
          });
