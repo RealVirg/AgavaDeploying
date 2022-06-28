@@ -198,10 +198,10 @@ function value1_value2_chart(csv, target, wdth, hght){
     function(data) {
 
       function compare(a, b) {
-        if  (a.x < b.x){
+        if  (parseInt(a.x) < parseInt(b.x)){
           return -1;
         }
-        if (a.x > b.x){
+        if (parseInt(a.x) > parseInt(b.x)){
           return 1;
         }
         return 0;
