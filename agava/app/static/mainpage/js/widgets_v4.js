@@ -1,4 +1,4 @@
-function f(csv, target, wdth, hght){
+function pd_chart(csv, target, wdth, hght){
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
       width = wdth - margin.left - margin.right,
       height = hght - margin.top - margin.bottom;
