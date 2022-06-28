@@ -75,7 +75,7 @@ class AccountParameterModel(models.Model):
 
 class AccountHistoryModel(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    action = models.CharField(default="nothing")
+    action = models.CharField(default="nothing", max_length=1000)
 
     def __str__(self):
         tz = timezone.get_default_timezone()
