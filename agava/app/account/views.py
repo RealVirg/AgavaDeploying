@@ -234,3 +234,18 @@ def device(request, id):
             'params': params
         }
     )
+
+
+@login_required
+def monitors(request, id):
+    return render(request,
+                  'account/devices.html',
+                  {})
+
+
+@login_required
+def monitor(request, id):
+    prj = get_object_or_404(AccountProjectModel, id=device.project.id)
+    return render(request,
+                  'account/devices.html',
+                  {})

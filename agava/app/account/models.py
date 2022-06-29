@@ -43,6 +43,14 @@ class AccountProjectModel(models.Model):
         return reverse('project-detail', kwargs={'id': self.id})
 
 
+class AccountMonitorModel(models.Model):
+    name = models.CharField(default="monitor", max_length=200)
+    project = models.ForeignKey(AccountProjectModel, on_delete=models.CASCADE, null=True)
+
+    def get_absolute_url(self):
+        return reverse('monitor', kwargs={'id': self.id})
+
+
 class AccountDevicesModel(models.Model):
     name_device = models.CharField(default='device', max_length=200)
     type_device = models.CharField(default='type', max_length=200)
@@ -81,4 +89,5 @@ class AccountParameterModel(models.Model):
 
     def __str__(self):
         return self.name_parameter
+
 
