@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
                      AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel,
-                     AccountHistoryModel, AccountParameterOPDModel)
+                     AccountHistoryModel, AccountParameterOPDModel, AccountMonitorModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
                     AddParameterOPDForm, AddTagOPCForm, AddParameterForm, DelParameterForm)
 from django.shortcuts import redirect
@@ -238,6 +238,8 @@ def device(request, id):
 
 @login_required
 def monitors(request, id):
+    prj = get_object_or_404(AccountProjectModel, id=id)
+    monitors = AccountMonitorModel.objects.filter(project=prj)
     return render(request,
                   'account/devices.html',
                   {})
@@ -245,7 +247,7 @@ def monitors(request, id):
 
 @login_required
 def monitor(request, id):
-    prj = get_object_or_404(AccountProjectModel, id=device.project.id)
+    current_monitor = get_object_or_404(AccountMonitorModel, id=id)
     return render(request,
                   'account/devices.html',
                   {})

@@ -71,3 +71,6 @@ class DelParameterForm(forms.Form):
         self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
             device=get_object_or_404(AccountDevicesModel, id=id)), label='Параметр для удаления')
 
+
+class CreateMonitorForm(forms.Form):
+    pass
