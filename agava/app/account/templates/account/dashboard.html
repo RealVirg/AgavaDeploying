@@ -4,13 +4,14 @@
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block header %}
-    <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
-{% endblock %}
-{% block content %}
+
 <script>
     function click(){
         print({{ k }})
     }
 </script>
+    <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
+{% endblock %}
+{% block content %}
 <button onclick="click()">check</button>
 {% endblock %}
