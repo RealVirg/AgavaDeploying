@@ -12,7 +12,7 @@
 <div class='device_page'>
     <ul class="list-div">
         {% for device in dvs %}
-        <li class="div"><a class="device" href="{{ device.get_absolute_url }}">{{ device.name_device }}</a></li>
+            <li class="div"><a class="device" href="{{ device.get_absolute_url }}">{{ device.name_device }}</a></li>
         {% endfor %}
     </ul>
     <form class="create-device-form" action="." method="post">

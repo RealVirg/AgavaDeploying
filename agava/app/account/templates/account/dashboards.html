@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base_account.html" %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% endblock %}
+{% block header %}
+    <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
+{% endblock %}
+{% block content %}
+<div class="dashboards_page">
+    <ul class="list_dashboards">
+        {% for dashboard in dboards %}
+            <li class="item_dashboard"><a class="dashboard" href="{{ dashboard.get_absolute_url }}">{{ dashboard.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <form class="create_dashboard_form" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Создать Dashboard" name="create"></p>
+    </form>
+</div>
+{% endblock %}
+<!--dboards-->
+<!--form-->
+<!--prj-->

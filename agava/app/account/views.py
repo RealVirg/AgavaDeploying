@@ -252,7 +252,8 @@ def dashboards(request, id):
     return render(request,
                   'account/dashboards.html',
                   {"dboards": dboards,
-                   "form": form})
+                   "form": form,
+                   "prj": prj})
 
 
 @login_required
