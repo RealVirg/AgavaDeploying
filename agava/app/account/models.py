@@ -65,7 +65,6 @@ class AccountModbusRegisterModel(models.Model):
     address_read = models.CharField(null=True, max_length=200)
     number_function_write = models.CharField(null=True, max_length=200)
     address_write = models.CharField(null=True, max_length=200)
-    project = models.ForeignKey(AccountParameterModel, on_delete=models.CASCADE, null=True)
 
 
 class AccountParameterModel(models.Model):
