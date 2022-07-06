@@ -59,23 +59,23 @@ class AccountParameterValueModel(models.Model):
     value = models.CharField(null=True, max_length=200)
 
 
-class AccountParameterModel(models.Model):
-    name_parameter = models.CharField(default="parameter", max_length=200)
-    type_parameter = models.CharField(default="type_parameter", max_length=200)
-    value = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
-    device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return self.name_parameter
-
-
 class AccountModbusRegisterModel(models.Model):
-    parameter = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
     number_device = models.CharField(null=True, max_length=200)
     number_function_read = models.CharField(null=True, max_length=200)
     address_read = models.CharField(null=True, max_length=200)
     number_function_write = models.CharField(null=True, max_length=200)
     address_write = models.CharField(null=True, max_length=200)
+
+
+class AccountParameterModel(models.Model):
+    name_parameter = models.CharField(default="parameter", max_length=200)
+    type_parameter = models.CharField(default="type_parameter", max_length=200)
+    value = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
+    device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
+    modbus_register = models.OneToOneField(AccountModbusRegisterModel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name_parameter
 
 
 class AccountDashboardModel(models.Model):
