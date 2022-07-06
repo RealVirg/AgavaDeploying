@@ -42,22 +42,12 @@ class CreateDeviceForm(forms.Form):
     type_device = forms.ChoiceField(choices=ch, label='Тип устройства ')
 
 
-class AddParameterOPDForm(forms.Form):
-    number = forms.CharField()
-    name = forms.CharField()
-
-
 class AddRegisterModbusForm(forms.Form):
     number_device = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Номер устройства"}))
     number_function_read = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Функция чтения"}))
     address_read = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Адрес чтения"}))
     number_function_write = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Функция записи"}))
     address_write = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'placeholder': "Адрес записи"}))
-
-
-class AddTagOPCForm(forms.Form):
-    type_OPC = forms.CharField()
-    address = forms.CharField()
 
 
 class AddParameterForm(forms.Form):
@@ -72,5 +62,5 @@ class DelParameterForm(forms.Form):
             device=get_object_or_404(AccountDevicesModel, id=id)), label='Параметр для удаления')
 
 
-class CreateMonitorForm(forms.Form):
-    pass
+class CreateDashboardForm(forms.Form):
+    name_dashboard = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': "Название "}))

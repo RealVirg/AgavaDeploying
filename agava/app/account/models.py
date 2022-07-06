@@ -43,14 +43,6 @@ class AccountProjectModel(models.Model):
         return reverse('project-detail', kwargs={'id': self.id})
 
 
-class AccountMonitorModel(models.Model):
-    name = models.CharField(default="monitor", max_length=200)
-    project = models.ForeignKey(AccountProjectModel, on_delete=models.CASCADE, null=True)
-
-    def get_absolute_url(self):
-        return reverse('monitor', kwargs={'id': self.id})
-
-
 class AccountDevicesModel(models.Model):
     name_device = models.CharField(default='device', max_length=200)
     type_device = models.CharField(default='type', max_length=200)
@@ -63,7 +55,22 @@ class AccountDevicesModel(models.Model):
         return reverse('device', kwargs={"id": self.id})
 
 
+class AccountParameterValueModel(models.Model):
+    value = models.CharField(null=True, max_length=200)
+
+
+class AccountParameterModel(models.Model):
+    name_parameter = models.CharField(default="parameter", max_length=200)
+    type_parameter = models.CharField(default="type_parameter", max_length=200)
+    value = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
+    device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name_parameter
+
+
 class AccountModbusRegisterModel(models.Model):
+    parameter = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
     number_device = models.CharField(null=True, max_length=200)
     number_function_read = models.CharField(null=True, max_length=200)
     address_read = models.CharField(null=True, max_length=200)
@@ -71,23 +78,17 @@ class AccountModbusRegisterModel(models.Model):
     address_write = models.CharField(null=True, max_length=200)
 
 
-class AccountTagOPCModel(models.Model):
-    type_OPC = models.CharField(null=True, max_length=200)
-    address = models.CharField(null=True, max_length=200)
+class AccountDashboardModel(models.Model):
+    name = models.CharField(default="dashboard", max_length=200)
+    project = models.ForeignKey(AccountProjectModel, on_delete=models.CASCADE, null=True)
+
+    def get_absolute_url(self):
+        return reverse('dashboard', kwargs={'id': self.id})
 
 
-class AccountParameterOPDModel(models.Model):
-    number = models.CharField(null=True, max_length=200)
-    name = models.CharField(null=True, max_length=200)
-
-
-class AccountParameterModel(models.Model):
-    name_parameter = models.CharField(default="parameter", max_length=200)
-    type_parameter = models.CharField(default="type_parameter", max_length=200)
-    device = models.ForeignKey(AccountDevicesModel, on_delete=models.CASCADE, null=True)
-    modbus_register = models.OneToOneField(AccountModbusRegisterModel, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return self.name_parameter
-
-
+class AccountWidgetModel(models.Model):
+    name = models.CharField(default="", max_length=200)
+    value = models.ForeignKey(AccountParameterValueModel, on_delete=models.CASCADE, null=True)
+    wdth = models.CharField(default="100", max_length=200)
+    hght = models.CharField(default="100", max_length=200)
+    dashboard = models.ForeignKey(AccountDashboardModel, on_delete=models.CASCADE, null=True)

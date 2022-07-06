@@ -4,10 +4,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
-                     AccountParameterModel, AccountTagOPCModel, AccountModbusRegisterModel,
-                     AccountHistoryModel, AccountParameterOPDModel, AccountMonitorModel)
+                     AccountParameterModel, AccountModbusRegisterModel,
+                     AccountHistoryModel, AccountDashboardModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterOPDForm, AddTagOPCForm, AddParameterForm, DelParameterForm)
+                    AddParameterForm, DelParameterForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -237,17 +237,20 @@ def device(request, id):
 
 
 @login_required
-def monitors(request, id):
+def dashboards(request, id):
     prj = get_object_or_404(AccountProjectModel, id=id)
-    monitors = AccountMonitorModel.objects.filter(project=prj)
+    dboards = AccountDashboardModel.objects.filter(project=prj)
+    if request.method == "POST":
+        pass
+
     return render(request,
-                  'account/devices.html',
-                  {})
+                  'account/dashboards.html',
+                  {"dboards": dboards})
 
 
 @login_required
-def monitor(request, id):
-    current_monitor = get_object_or_404(AccountMonitorModel, id=id)
+def dashboard(request, id):
+    current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     return render(request,
-                  'account/devices.html',
-                  {})
+                  'account/dashboard.html',
+                  {"current_dashboard": current_dashboard})
