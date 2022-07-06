@@ -260,7 +260,9 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
+    k = 1
     return render(request,
                   'account/dashboard.html',
                   {"current_dashboard": current_dashboard,
-                   "prj": prj})
+                   "prj": prj,
+                   "k": k})
