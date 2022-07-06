@@ -7,7 +7,7 @@ from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel,
                      AccountParameterModel, AccountModbusRegisterModel,
                      AccountHistoryModel, AccountDashboardModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterForm, DelParameterForm)
+                    AddParameterForm, DelParameterForm, CreateDashboardForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -241,16 +241,25 @@ def dashboards(request, id):
     prj = get_object_or_404(AccountProjectModel, id=id)
     dboards = AccountDashboardModel.objects.filter(project=prj)
     if request.method == "POST":
-        pass
+        form = CreateDashboardForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            new_db = AccountDashboardModel(name=cd["name_dashboard"], project=prj)
+            new_db.save()
+    else:
+        form = CreateDashboardForm()
 
     return render(request,
                   'account/dashboards.html',
-                  {"dboards": dboards})
+                  {"dboards": dboards,
+                   "form": form})
 
 
 @login_required
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
+    prj = current_dashboard.project
     return render(request,
                   'account/dashboard.html',
-                  {"current_dashboard": current_dashboard})
+                  {"current_dashboard": current_dashboard,
+                   "prj": prj})

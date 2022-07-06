@@ -63,4 +63,4 @@ class DelParameterForm(forms.Form):
 
 
 class CreateDashboardForm(forms.Form):
-    name_dashboard = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': "Название "}))
+    name_dashboard = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': "Название Dashboard"}))
