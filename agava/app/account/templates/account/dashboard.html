@@ -18,8 +18,13 @@
         <form class="create_widget_form" method="post">
             {{ form.as_p }}
             {% csrf_token %}
+            <p><input type="submit" value="Выбрать устройство" name="choose"></p>
+        </form>
+        <form class="create_widget_form" action="" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
             <p><input type="submit" value="Создать виджет" name="create"></p>
-    </form>
+        </form>
     </div>
     <script>
     function f(){

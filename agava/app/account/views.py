@@ -7,7 +7,8 @@ from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel,
                      AccountParameterModel, AccountModbusRegisterModel,
                      AccountHistoryModel, AccountDashboardModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm)
+                    AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm,
+                    ChooseDeviceForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -272,15 +273,25 @@ def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
     if request.method == "POST":
-        form = CreateWidgetForm(prj.id, request.POST)
-        if form.is_valid():
-            pass
+        choose_form = ChooseDeviceForm(prj.id)
+        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0])
+        if "choose" in request.POST:
+            choose_form = ChooseDeviceForm(prj.id, request.POST)
+            if choose_form.is_valid():
+                cd = choose_form.cleaned_data
+                id_device = cd['device'].id
+                if "create" in request.POST:
+                    form = CreateWidgetForm(id_device, request.POST)
+                    if form.is_valid():
+                        _cd = form.cleaned_data
     else:
-        form = CreateWidgetForm(prj.id)
+        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0])
+        choose_form = ChooseDeviceForm(prj.id)
 
     return render(request,
                   'account/dashboard.html',
                   {"current_dashboard": current_dashboard,
                    "prj": prj,
-                   "form": form
+                   "form": form,
+                   "choose_form": choose_form
                    })
