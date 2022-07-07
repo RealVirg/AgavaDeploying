@@ -274,11 +274,10 @@ def dashboard(request, id):
     widgets = AccountWidgetModel.objects.filter(dashboard=current_dashboard)
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            widget = AccountWidgetModel(parameter=cd["parameter"], name=cd["name"], type=cd["type"],
+        cd = form.cleaned_data
+        widget = AccountWidgetModel(parameter=cd["parameter"], name=cd["name"], type=cd["type"],
                                         wdth=cd["wdth"], hght=cd["hght"], dashboard=current_dashboard)
-            widget.save()
+        widget.save()
     else:
         form = CreateWidgetForm(prj.id)
 
