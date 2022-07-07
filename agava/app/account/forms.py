@@ -80,9 +80,7 @@ class CreateWidgetForm(forms.Form):
         project_devices = AccountDevicesModel.objects.filter(project=prj)
         q = AccountParameterModel.objects.none()
         for device in project_devices:
-            logging.warning(AccountParameterModel.objects.filter(device=device))
-            logging.warning(q.union(AccountParameterModel.objects.filter(device=device)))
-        logging.warning(q)
+            q = q.union(AccountParameterModel.objects.filter(device=device))
         self.fields['parameter'] = forms.ModelChoiceField(q, label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
