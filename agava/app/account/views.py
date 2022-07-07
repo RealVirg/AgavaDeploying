@@ -272,7 +272,7 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
-    choose_form = ChooseDeviceForm(prj.id, request)
+    choose_form = ChooseDeviceForm(prj.id, request.POST)
     if choose_form.is_valid():
         cd = choose_form.cleaned_data
         id_device = cd['device'].id
