@@ -84,7 +84,7 @@ class CreateWidgetForm(forms.Form):
     def __init__(self, id, *args, **kwargs):
         super(CreateWidgetForm, self).__init__(*args, **kwargs)
         self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
-            device=get_object_or_404(AccountDevicesModel.objects.get(id=id))), label="")
+            device=get_object_or_404(AccountDevicesModel, id=id)), label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
     hght = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Высота виджета"}))
