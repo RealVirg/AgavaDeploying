@@ -15,4 +15,5 @@
     grid-column-end: 7;
     grid-row-start: 1;
     grid-row-end: 60;
+    background: blue;
   }
