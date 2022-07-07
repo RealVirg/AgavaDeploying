@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django import forms
-from .models import AccountProjectModel, AccountModel, AccountParameterModel, AccountDevicesModel
+from .models import AccountProjectModel, AccountModel, AccountParameterModel, AccountDevicesModel, AccountDashboardModel
 from django.shortcuts import get_object_or_404
 import logging
 
@@ -64,3 +64,10 @@ class DelParameterForm(forms.Form):
 
 class CreateDashboardForm(forms.Form):
     name_dashboard = forms.CharField(label="", widget=forms.TextInput(attrs={'placeholder': "Название Dashboard"}))
+
+
+class DeleteDashboardForm(forms.Form):
+    def __init__(self, id, *args, **kwargs):
+        super(DeleteDashboardForm, self).__init__(*args, **kwargs)
+        self.fields['name'] = forms.ModelChoiceField(
+            AccountDashboardModel.objects.filter(project=get_object_or_404(AccountProjectModel, id=id)))

@@ -1,17 +1,14 @@
 {% extends "base_account.html" %}
 {% block css %}
 {% load static %}
+<script src="{% static 'mainpage/js/widgets_v4.js' %}"></script>
+{% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
 {% endblock %}
 {% block header %}
-
-<script>
-    function click(){
-        print({{ k }})
-    }
-</script>
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<button onclick="click()">check</button>
+<div id="check"></div>
+<button onclick="date_value_chart({% static 'mainpage/csv/test.csv' %}, '#check', 400, 400)">check</button>
 {% endblock %}
