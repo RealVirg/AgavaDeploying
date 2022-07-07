@@ -16,7 +16,7 @@
     <button class="but" onclick="f()">click</button>
     <div class="check" id="check">
         <form class="create_widget_form" method="post">
-            {{ form.as_p }}
+            {{ choose_form.as_p }}
             {% csrf_token %}
             <p><input type="submit" value="Выбрать устройство" name="choose"></p>
         </form>
