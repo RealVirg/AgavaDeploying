@@ -80,6 +80,7 @@ class CreateWidgetForm(forms.Form):
         project_devices = AccountDevicesModel.objects.filter(project=prj)
         q = AccountParameterModel.objects.none()
         for device in project_devices:
+            logging.warning(AccountParameterModel.objects.filter(device=device))
             q.union(q, AccountParameterModel.objects.filter(device=device))
         logging.warning(q)
         self.fields['parameter'] = forms.ModelChoiceField(q, label="")
