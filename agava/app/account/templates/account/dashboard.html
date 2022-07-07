@@ -16,7 +16,9 @@
     <button class="but" onclick="click()">click</button>
     <div class="check" id="check"></div>
     <script>
-        date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400)
+    function click(){
+        date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
+    }
     </script>
 </div>
 {% endblock %}

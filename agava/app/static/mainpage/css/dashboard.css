@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     font-family: "Roboto", Helvetica, Arial, sans-serif;
-    grid-auto-rows: auto;
+    grid-auto-rows: 30px;;
   }
 .but{
     grid-column-start: 1;
