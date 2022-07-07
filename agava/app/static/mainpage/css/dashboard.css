@@ -1,0 +1,18 @@
+.dashboard_page{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    grid-auto-rows: auto;
+  }
+  .but{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  .check{
+    grid-column-start: 2;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 60;
+  }

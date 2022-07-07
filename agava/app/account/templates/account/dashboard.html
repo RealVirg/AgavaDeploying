@@ -5,16 +5,20 @@
 <script src="{% static 'mainpage/js/widgets_v4.js' %}"></script>
 {% load static %}
 <link rel="stylesheet" href="{% static 'mainpage/css/header.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'mainpage/css/dashboard.css' %}">
 {% endblock %}
 {% block header %}
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<button onclick="click()">click</button>
-<div id="check"></div>
-<script>
-function click(){
-    date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
-}
-</script>
+<div class="dashboard_page">
+    <button class="but" onclick="click()">click</button>
+    <div class="check" id="check"></div>
+    <script>
+    function click(){
+        date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
+    }
+    </script>
+</div>
 {% endblock %}
