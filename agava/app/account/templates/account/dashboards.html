@@ -18,6 +18,11 @@
             {% csrf_token %}
             <p><input type="submit" value="Создать Dashboard" name="create"></p>
     </form>
+    <form class="del_dashboard_form" method="post">
+            {{ del_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Удалить Dashboard" name="del"></p>
+    </form>
 </div>
 {% endblock %}
 <!--dboards-->

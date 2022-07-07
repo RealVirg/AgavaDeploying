@@ -7,7 +7,7 @@ from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel,
                      AccountParameterModel, AccountModbusRegisterModel,
                      AccountHistoryModel, AccountDashboardModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterForm, DelParameterForm, CreateDashboardForm)
+                    AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -241,18 +241,28 @@ def dashboards(request, id):
     prj = get_object_or_404(AccountProjectModel, id=id)
     dboards = AccountDashboardModel.objects.filter(project=prj)
     if request.method == "POST":
-        form = CreateDashboardForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            new_db = AccountDashboardModel(name=cd["name_dashboard"], project=prj)
-            new_db.save()
+        form = CreateDashboardForm()
+        del_form = DeleteDashboardForm(prj.id)
+        if "create" in request.POST:
+            form = CreateDashboardForm(request.POST)
+            if form.is_valid():
+                cd = form.cleaned_data
+                new_db = AccountDashboardModel(name=cd["name_dashboard"], project=prj)
+                new_db.save()
+        elif "del" in request.POST:
+            del_form = DeleteDashboardForm(prj.id, request.POST)
+            if del_form.is_valid():
+                cd = del_form.cleaned_data
+                AccountDashboardModel.objects.get(id=cd['name'].id).delete()
     else:
         form = CreateDashboardForm()
+        del_form = DeleteDashboardForm(prj.id)
 
     return render(request,
                   'account/dashboards.html',
                   {"dboards": dboards,
                    "form": form,
+                   "del_form": del_form,
                    "prj": prj})
 
 
@@ -260,9 +270,7 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
-    k = 1
     return render(request,
                   'account/dashboard.html',
                   {"current_dashboard": current_dashboard,
-                   "prj": prj,
-                   "k": k})
+                   "prj": prj})
