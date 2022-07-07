@@ -79,7 +79,7 @@ class CreateWidgetForm(forms.Form):
         self.fields['device'] = forms.ModelChoiceField(AccountDevicesModel.objects.filter(
             project=get_object_or_404(AccountProjectModel, id=id)), label="")
         self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
-            device=get_object_or_404(AccountDevicesModel.objects.get(id=self.fields['device'].id))), label="")
+            device=get_object_or_404(AccountDevicesModel.objects.get(id=self.cleaned_data['device'].id))), label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
     hght = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Высота виджета"}))
