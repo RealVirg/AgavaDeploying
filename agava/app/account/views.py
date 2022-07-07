@@ -7,8 +7,7 @@ from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel,
                      AccountParameterModel, AccountModbusRegisterModel,
                      AccountHistoryModel, AccountDashboardModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
-                    AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm,
-                    ChooseDeviceForm)
+                    AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
@@ -272,24 +271,16 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
-    choose_form = ChooseDeviceForm(prj.id, request.body)
-    if choose_form.is_valid():
-        cd = choose_form.cleaned_data
-        id_device = cd['device'].id
-        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
-        if request.method == "POST":
-            if "create" in request.POST:
-                form = CreateWidgetForm(id_device, request.POST)
-                if form.is_valid():
-                    _cd = form.cleaned_data
+    if request.method == "POST":
+        form = CreateWidgetForm(prj.id, request.POST)
+        if form.is_valid():
+            _cd = form.cleaned_data
     else:
-        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
-        choose_form = ChooseDeviceForm(prj.id)
+        form = CreateWidgetForm(prj.id)
 
     return render(request,
                   'account/dashboard.html',
                   {"current_dashboard": current_dashboard,
                    "prj": prj,
-                   "form": form,
-                   "choose_form": choose_form
+                   "form": form
                    })

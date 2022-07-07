@@ -73,18 +73,14 @@ class DeleteDashboardForm(forms.Form):
             AccountDashboardModel.objects.filter(project=get_object_or_404(AccountProjectModel, id=id)), label='')
 
 
-class ChooseDeviceForm(forms.Form):
-    def __init__(self, id, *args, **kwargs):
-        super(ChooseDeviceForm, self).__init__(*args, **kwargs)
-        self.fields['device'] = forms.ModelChoiceField(AccountDevicesModel.objects.filter(
-            project=get_object_or_404(AccountProjectModel, id=id)), label="")
-
-
 class CreateWidgetForm(forms.Form):
-    def __init__(self, id, *args, **kwargs):
+    def __init__(self, prj, *args, **kwargs):
         super(CreateWidgetForm, self).__init__(*args, **kwargs)
-        self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
-            device=get_object_or_404(AccountDevicesModel, id=id)), label="")
+        project_devices = AccountDevicesModel.objects.filter(project=prj)
+        q = AccountParameterModel.objects.none()
+        for device in project_devices:
+            q += AccountParameterModel.objects.filter(device=device)
+        self.fields['parameter'] = forms.ModelChoiceField(q, label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
     hght = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Высота виджета"}))
