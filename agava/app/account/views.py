@@ -271,7 +271,7 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
-    widgets = AccountWidgetModel.objects.filter(dashboards=current_dashboard)
+    widgets = AccountWidgetModel.objects.filter(dashboard=current_dashboard)
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
