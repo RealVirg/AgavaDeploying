@@ -81,7 +81,7 @@ class CreateWidgetForm(forms.Form):
         q = AccountParameterModel.objects.none()
         for device in project_devices:
             logging.warning(AccountParameterModel.objects.filter(device=device))
-            q.union(AccountParameterModel.objects.filter(device=device)).order_by('name_parameter')
+            logging.warning(q.union(AccountParameterModel.objects.filter(device=device)))
         logging.warning(q)
         self.fields['parameter'] = forms.ModelChoiceField(q, label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
