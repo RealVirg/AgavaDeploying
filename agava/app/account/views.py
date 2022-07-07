@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import (AccountProjectModel, AccountModel, AccountPermissionsModel, AccountDevicesModel,
                      AccountParameterModel, AccountModbusRegisterModel,
-                     AccountHistoryModel, AccountDashboardModel)
+                     AccountHistoryModel, AccountDashboardModel, AccountWidgetModel)
 from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDeviceForm, AddRegisterModbusForm,
                     AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm)
 from django.shortcuts import redirect
@@ -274,7 +274,10 @@ def dashboard(request, id):
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
-            _cd = form.cleaned_data
+            cd = form.cleaned_data
+            widget = AccountWidgetModel(parameter=cd["parameter"], name=cd["name"], type=cd["type"],
+                                        wdth=cd["wdth"], hght=cd["hght"])
+            widget.save()
     else:
         form = CreateWidgetForm(prj.id)
 
