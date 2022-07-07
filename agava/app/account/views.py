@@ -272,18 +272,16 @@ def dashboards(request, id):
 def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
-    if request.method == "POST":
-        choose_form = ChooseDeviceForm(prj.id)
+    choose_form = ChooseDeviceForm(prj.id, request)
+    if choose_form.is_valid():
+        cd = choose_form.cleaned_data
+        id_device = cd['device'].id
         form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
-        if "choose" in request.POST:
-            choose_form = ChooseDeviceForm(prj.id, request.POST)
-            if choose_form.is_valid():
-                cd = choose_form.cleaned_data
-                id_device = cd['device'].id
-                if "create" in request.POST:
-                    form = CreateWidgetForm(id_device, request.POST)
-                    if form.is_valid():
-                        _cd = form.cleaned_data
+        if request.method == "POST":
+            if "create" in request.POST:
+                form = CreateWidgetForm(id_device, request.POST)
+                if form.is_valid():
+                    _cd = form.cleaned_data
     else:
         form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
         choose_form = ChooseDeviceForm(prj.id)
