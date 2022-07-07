@@ -285,7 +285,7 @@ def dashboard(request, id):
                     if form.is_valid():
                         _cd = form.cleaned_data
     else:
-        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0])
+        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
         choose_form = ChooseDeviceForm(prj.id)
 
     return render(request,
