@@ -274,7 +274,7 @@ def dashboard(request, id):
     prj = current_dashboard.project
     if request.method == "POST":
         choose_form = ChooseDeviceForm(prj.id)
-        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0])
+        form = CreateWidgetForm(AccountDevicesModel.objects.filter(project=prj)[0].id)
         if "choose" in request.POST:
             choose_form = ChooseDeviceForm(prj.id, request.POST)
             if choose_form.is_valid():
