@@ -13,10 +13,10 @@
 {% endblock %}
 {% block content %}
 <div class="dashboard_page">
-    <button class="but" onclick="click()">click</button>
+    <button class="but" onclick="f()">click</button>
     <div class="check" id="check"></div>
     <script>
-    function click(){
+    function f(){
         date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
     }
     </script>
