@@ -4,6 +4,7 @@ from django import forms
 from .models import AccountProjectModel, AccountModel, AccountParameterModel, AccountDevicesModel, AccountDashboardModel
 from django.shortcuts import get_object_or_404
 import logging
+from itertools import chain
 
 
 class CreateProjectForm(forms.Form):
@@ -79,7 +80,7 @@ class CreateWidgetForm(forms.Form):
         project_devices = AccountDevicesModel.objects.filter(project=prj)
         q = AccountParameterModel.objects.none()
         for device in project_devices:
-            q += AccountParameterModel.objects.filter(device=device)
+            q.union(AccountParameterModel.objects.filter(device=device))
         self.fields['parameter'] = forms.ModelChoiceField(q, label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
