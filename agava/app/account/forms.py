@@ -77,7 +77,7 @@ class CreateWidgetForm(forms.Form):
     def __init__(self, id, *args, **kwargs):
         super(CreateWidgetForm, self).__init__(*args, **kwargs)
         self.fields['device'] = forms.ModelChoiceField(AccountDevicesModel.objects.filter(
-            project=get_object_or_404(AccountProjectModel.projects.get(id=id))), label="")
+            project=get_object_or_404(AccountProjectModel, id=id)), label="")
         self.fields['parameter'] = forms.ModelChoiceField(AccountParameterModel.objects.filter(
             device=get_object_or_404(AccountDevicesModel.objects.get(id=self.fields['device'].id))), label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
