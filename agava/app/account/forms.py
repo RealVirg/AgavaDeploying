@@ -86,7 +86,7 @@ class CreateWidgetForm(forms.Form):
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
     hght = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Высота виджета"}))
     ch = (
-        ('line chart', "line_chart"),
-        ('last value', 'last_value')
+        ('line_chart', "line chart"),
+        ('last_value', 'last value')
     )
     type = forms.ChoiceField(label="", choices=ch)
