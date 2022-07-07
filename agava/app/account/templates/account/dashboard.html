@@ -14,7 +14,13 @@
 {% block content %}
 <div class="dashboard_page">
     <button class="but" onclick="f()">click</button>
-    <div class="check" id="check"></div>
+    <div class="check" id="check">
+        <form class="create_widget_form" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Создать виджет" name="create"></p>
+    </form>
+    </div>
     <script>
     function f(){
         date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
