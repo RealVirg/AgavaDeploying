@@ -10,8 +10,8 @@
     <li class="menu__group"><a class="menu__link r-link text-underlined" href="{{ prj.get_absolute_url }}">Back</a></li>
 {% endblock %}
 {% block content %}
-<div id="check"></div>
 <button onclick="click()">click</button>
+<div id="check"></div>
 <script>
 function click(){
     date_value_chart("{% static 'mainpage/csv/test.csv' %}", '#check', 400, 400);
