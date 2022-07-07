@@ -91,4 +91,5 @@ class AccountWidgetModel(models.Model):
     parameter = models.ForeignKey(AccountParameterModel, on_delete=models.CASCADE, null=True)
     wdth = models.CharField(default="100", max_length=200)
     hght = models.CharField(default="100", max_length=200)
+    type = models.CharField(default="last_value", max_length=200)
     dashboard = models.ForeignKey(AccountDashboardModel, on_delete=models.CASCADE, null=True)
