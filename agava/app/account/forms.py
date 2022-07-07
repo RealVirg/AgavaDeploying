@@ -70,4 +70,4 @@ class DeleteDashboardForm(forms.Form):
     def __init__(self, id, *args, **kwargs):
         super(DeleteDashboardForm, self).__init__(*args, **kwargs)
         self.fields['name'] = forms.ModelChoiceField(
-            AccountDashboardModel.objects.filter(project=get_object_or_404(AccountProjectModel, id=id)))
+            AccountDashboardModel.objects.filter(project=get_object_or_404(AccountProjectModel, id=id)), label='')
