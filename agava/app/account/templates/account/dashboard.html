@@ -13,15 +13,14 @@
 {% endblock %}
 {% block content %}
 <div class="dashboard_page">
-    <button class="but" onclick="f()">click</button>
+    <form class="create_widget_form" action="" method="post">
+        {{ choose_form.as_p }}
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Создать виджет" name="create"></p>
+    </form>
     <div class="check" id="check">
-        <form class="create_widget_form" action="" method="post">
-            {{ choose_form.as_p }}
-            {% csrf_token %}
-            {{ form.as_p }}
-            {% csrf_token %}
-            <p><input type="submit" value="Создать виджет" name="create"></p>
-        </form>
     </div>
     <script>
     function f(){

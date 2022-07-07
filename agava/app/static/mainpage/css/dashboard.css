@@ -4,13 +4,12 @@
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     grid-auto-rows: 30px;;
   }
-.but{
+.create_widget_form{
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
-    grid-row-end: 2;
 }
-.check{
+.widgets{
     grid-column-start: 2;
     grid-column-end: 7;
     grid-row-start: 1;
