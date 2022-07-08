@@ -298,7 +298,7 @@ def dashboard(request, id):
                     _d = str(_d)
                 s = str(_y + y) + "-" + _m + "-" + _d + "," + str(random.randint(-2000, 2000)) + "\n"
                 result += s
-            with open("static/mainpage/csv/test.csv", "w") as f:
+            with open("mainpage/csv/test.csv", "w") as f:
                 f.write(result)
             wg.value = 'http://172.16.0.88:1337/static/mainpage/csv/test.csv'
     if request.method == "POST":
