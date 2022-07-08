@@ -23,7 +23,7 @@
     <div class="widgets" id="widgets">
         {% for widget in widgets %}
         <script>
-            show_widget({{ widget.type }}, "{{ widget.value }}".split(", "), {{ widget.wdth }}, {{ widget.hght }}, '#widgets')
+            show_widget("{{ widget.type }}", "{{ widget.value }}".split(", "), {{ widget.wdth }}, {{ widget.hght }}, '#widgets')
         </script>
         {% endfor %}
     </div>
