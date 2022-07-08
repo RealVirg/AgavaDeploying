@@ -300,7 +300,7 @@ def dashboard(request, id):
                 result += s
             with open("static/mainpage/csv/test.csv", "w") as f:
                 f.write(result)
-            wg.value = '172.16.0.88:1337/static/mainpage/csv/test.csv'
+            wg.value = 'http://172.16.0.88:1337/static/mainpage/csv/test.csv'
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
