@@ -3,7 +3,7 @@ function show_widget(type, data, wdth, hght, target){
   {
     date_value_chart(data, target, wdth, hght)
   }
-  elif (type=="last_value")
+  else if (type=="last_value")
   {
     last_values(data, target, wdth, hght)
   }
