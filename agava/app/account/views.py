@@ -281,7 +281,7 @@ def dashboard(request, id):
             widget.save()
             for param in cd["parameters"]:
                 widget.parameters.add(param)
-            widgets.save()
+            widget.save()
     else:
         form = CreateWidgetForm(prj.id)
 
