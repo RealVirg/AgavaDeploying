@@ -286,12 +286,12 @@ def dashboard(request, id):
                 _y = math.floor(i / 365)
                 _m = math.floor((i - (_y * 365)) / 30)
                 _d = i - _y * 365 - _m * 30
+                if _d > 28 or _d < 1 or _m > 12 or _m < 1:
+                    continue
                 if len(str(_m)) == 1:
                     _m = "0" + str(_m)
                 else:
                     _m = str(_m)
-                if _d > 28:
-                    continue
                 if len(str(_d)) == 1:
                     _d = "0" + str(_d)
                 else:
