@@ -5,7 +5,7 @@ function show_widget(type, data, wdth, hght, target){
   }
   else if (type=="last_value")
   {
-    last_values(data, target, wdth, hght)
+    last_values(data.split(", "), target, wdth, hght)
   }
 }
 
