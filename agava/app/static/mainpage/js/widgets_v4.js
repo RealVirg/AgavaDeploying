@@ -51,7 +51,7 @@ function date_value_chart(csv, target, wdth, hght){
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.csv(csv,
+  d3.csvParse(csv,
 
     function(d){
       return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
