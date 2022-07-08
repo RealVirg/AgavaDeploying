@@ -10,7 +10,7 @@ from .forms import (CreateProjectForm, EditAdminForm, NewAdminUserForm, CreateDe
                     AddParameterForm, DelParameterForm, CreateDashboardForm, DeleteDashboardForm, CreateWidgetForm)
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-import random
+import random, math
 
 
 def check_own_project(request, project_id):
@@ -277,6 +277,30 @@ def dashboard(request, id):
         if wg.type == "last_value":
             params = wg.parameters.all()
             wg.value = str([random.randint(1, 200) for i in range(len(params))])[1:-1]
+        if wg.type == "line_chart":
+            wg.value = "static/mainpage/css/test.csv"
+            y = 2013
+
+            result = "date,value\n"
+
+            for i in range(10000):
+                _y = math.floor(i / 365)
+                _m = math.floor((i - (_y * 365)) / 30)
+                _d = i - _y * 365 - _m * 30
+                if len(str(_m)) == 1:
+                    _m = "0" + str(_m)
+                else:
+                    _m = str(_m)
+                if _d > 28:
+                    continue
+                if len(str(_d)) == 1:
+                    _d = "0" + str(_d)
+                else:
+                    _d = str(_d)
+                s = str(_y + y) + "-" + _m + "-" + _d + "," + str(random.randint(-2000, 2000)) + "\n"
+                result += s
+            with open("static/mainpage/css/test.csv", "w") as f:
+                f.write(result)
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
