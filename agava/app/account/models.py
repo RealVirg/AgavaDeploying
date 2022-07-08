@@ -88,7 +88,7 @@ class AccountDashboardModel(models.Model):
 
 class AccountWidgetModel(models.Model):
     name = models.CharField(default="", max_length=200)
-    parameters = models.ManyToManyField(AccountParameterModel, on_delete=models.CASCADE, null=True)
+    parameters = models.ManyToManyField(AccountParameterModel, related_name="parameters")
     wdth = models.CharField(default="100", max_length=200)
     hght = models.CharField(default="100", max_length=200)
     type = models.CharField(default="last_value", max_length=200)
