@@ -1,11 +1,11 @@
 function show_widget(type, data, wdth, hght, target){
   if (type=="line_chart")
   {
-    date_value_chart(data, target, parseInt(wdth), parseInt(hght))
+    date_value_chart(data, target, wdth, hght)
   }
   elif (type=="last_value")
   {
-    last_values(data, target, parseInt(wdth), parseInt(hght))
+    last_values(data, target, wdth, hght)
   }
 }
 
