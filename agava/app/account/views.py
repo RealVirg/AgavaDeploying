@@ -287,6 +287,7 @@ def dashboard(request, id):
             for param in cd["parameters"]:
                 widget.parameters.add(param)
             widget.save()
+            return redirect(dashboard, id=id)
     else:
         form = CreateWidgetForm(prj.id)
 
