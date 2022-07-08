@@ -13,8 +13,8 @@ function show_widget(type, data, wdth, hght, target){
 function last_values(data, target, wdth, hght){
   var svg = d3.select(target)
     .append("svg")
-    .attr("width", wdth)
-    .attr("height", hght);
+    .attr("width", parseInt(wdth))
+    .attr("height", parseInt(hght));
 
 var bars = svg.selectAll(".myBars")
     .data(data)
@@ -22,8 +22,8 @@ var bars = svg.selectAll(".myBars")
     .append("rect");
 
 bars.attr("x", 10)
-    .attr("y", function(d,i){ return 10 + i*40 })
-    .attr("width", function(d){ return d })
+    .attr("y", function(d,i){ return 10 + i*40})
+    .attr("width", function(d){ return parseInt(d)})
     .attr("height", 30);
 
 var texts = svg.selectAll(".myTexts")
@@ -31,9 +31,9 @@ var texts = svg.selectAll(".myTexts")
     .enter()
     .append("text");
 
-texts.attr("x", function(d){ return d })
-    .attr("y", function(d,i){ return 30 + i*40 })
-    .text(function(d){ return d });
+texts.attr("x", function(d){ return parseInt(d) + 16})
+    .attr("y", function(d,i){ return 30 + i*40})
+    .text(function(d){ return parseInt(d)});
 }
 
 
