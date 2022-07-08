@@ -13,11 +13,6 @@
 {% endblock %}
 {% block content %}
 <div class="dashboard_page">
-    <ul class="list_widgets">
-        {% for widget in widgets %}
-        <li class="widget">{{ widget.name }}</li>
-        {% endfor %}
-    </ul>
     <form class="create_widget_form" action="" method="post">
         {{ choose_form.as_p }}
         {% csrf_token %}

@@ -79,7 +79,7 @@ class CreateWidgetForm(forms.Form):
         super(CreateWidgetForm, self).__init__(*args, **kwargs)
         project_devices = AccountDevicesModel.objects.filter(project=prj)
         q2 = AccountParameterModel.objects.filter(device__in=project_devices)
-        self.fields['parameter'] = forms.ModelChoiceField(q2, label="")
+        self.fields['parameters'] = forms.ModelMultipleChoiceField(q2, label="")
     name = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': "Имя виджета"}))
     wdth = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Ширина виджета"}))
     hght = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'placeholder': "Высота виджета"}))
