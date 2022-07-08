@@ -54,10 +54,7 @@ function date_value_chart(csv, target, wdth, hght){
   var data = d3.csvParse(csv, (d) => {
       return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
     })
-
-    function(data) {
-
-      var x = d3.scaleTime()
+    var x = d3.scaleTime()
         .domain(d3.extent(data, function(d) { return d.date; }))
         .range([ 0, width ]);
       xAxiss = svg.append("g")
@@ -210,8 +207,6 @@ function date_value_chart(csv, target, wdth, hght){
           focus1.style("opacity", 0)
           focusText.style("opacity", 0)
          });
-
-  }
 }
 
 function pvalue1_value2_chart(csv, target, wdth, hght) { // value1 must be possitive

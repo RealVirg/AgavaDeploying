@@ -298,7 +298,7 @@ def dashboard(request, id):
                     _d = str(_d)
                 s = str(_y + y) + "-" + _m + "-" + _d + "," + str(random.randint(-2000, 2000)) + "\n"
                 result += s
-            wg.value = result
+            wg.value = result[:-1]
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
