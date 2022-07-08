@@ -1,3 +1,43 @@
+function show_widget(type, data, wdth, hght, target){
+  if (type=="line_chart")
+  {
+    date_value_chart(data, target, parseInt(wdth), parseInt(hght))
+  }
+  elif (type=="last_value")
+  {
+    last_values(data, target, parseInt(wdth), parseInt(hght))
+  }
+}
+
+
+function last_values(data, target, wdth, hght){
+  var svg = d3.select(target)
+    .append("svg")
+    .attr("width", wdth)
+    .attr("height", hght);
+
+var bars = svg.selectAll(".myBars")
+    .data(data)
+    .enter()
+    .append("rect");
+
+bars.attr("x", 10)
+    .attr("y", function(d,i){ return 10 + i*40})
+    .attr("width", function(d){ return d})
+    .attr("height", 30);
+
+var texts = svg.selectAll(".myTexts")
+    .data(data)
+    .enter()
+    .append("text");
+
+texts.attr("x", function(d){ return d + 16})
+    .attr("y", function(d,i){ return 30 + i*40})
+    .text(function(d){ return d});
+}
+
+
+
 function date_value_chart(csv, target, wdth, hght){
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
       width = wdth - margin.left - margin.right,

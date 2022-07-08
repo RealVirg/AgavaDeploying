@@ -21,6 +21,11 @@
         <p><input type="submit" value="Создать виджет" name="create"></p>
     </form>
     <div class="widgets" id="widgets">
+        {% for widget in widgets %}
+        <script>
+            show_widget({{ widget.type }}, {{ value["widget.id"] }}, {{ widget.wdth}}, {{ widget.hght }}, '#widgets')
+        </script>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
