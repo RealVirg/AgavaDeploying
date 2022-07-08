@@ -298,7 +298,9 @@ def dashboard(request, id):
                     _d = str(_d)
                 s = str(_y + y) + "-" + _m + "-" + _d + "," + str(random.randint(-2000, 2000)) + "\n"
                 result += s
-            wg.value = result
+            with open("static/mainpage/csv/test.csv", "w") as f:
+                f.write(result)
+            wg.value = '172.16.0.88:1337/static/mainpage/csv/test.csv'
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
