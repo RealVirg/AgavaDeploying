@@ -278,7 +278,6 @@ def dashboard(request, id):
             params = wg.parameters.all()
             wg.value = str([random.randint(1, 200) for i in range(len(params))])[1:-1]
         if wg.type == "line_chart":
-            wg.value = "mainpage/csv/test.csv"
             y = 2013
 
             result = "date,value\n"
@@ -299,8 +298,7 @@ def dashboard(request, id):
                     _d = str(_d)
                 s = str(_y + y) + "-" + _m + "-" + _d + "," + str(random.randint(-2000, 2000)) + "\n"
                 result += s
-            with open("static/mainpage/csv/test.csv", "w") as f:
-                f.write(result[:-1])
+            wg.value = result
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
