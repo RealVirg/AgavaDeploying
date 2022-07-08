@@ -273,11 +273,10 @@ def dashboard(request, id):
     current_dashboard = get_object_or_404(AccountDashboardModel, id=id)
     prj = current_dashboard.project
     widgets = AccountWidgetModel.objects.filter(dashboard=current_dashboard)
-    values = {}
     for wg in widgets:
         if wg.type == "last_value":
             params = wg.parameters.all()
-            values[wg.id] = [random.randint(1, 200) for i in range(len(params))]
+            wg.value = str([random.randint(1, 200) for i in range(len(params))])[1:-1]
     if request.method == "POST":
         form = CreateWidgetForm(prj.id, request.POST)
         if form.is_valid():
@@ -296,5 +295,5 @@ def dashboard(request, id):
                   {"current_dashboard": current_dashboard,
                    "prj": prj,
                    "form": form,
-                   "widgets": widgets,
-                   "values": values})
+                   "widgets": widgets
+                   })
