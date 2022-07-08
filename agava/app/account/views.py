@@ -282,7 +282,7 @@ def dashboard(request, id):
 
             result = "date,value\\n"
 
-            for i in range(1000000):
+            for i in range(1000):
                 _y = math.floor(i / 365)
                 _m = math.floor((i - (_y * 365)) / 30)
                 _d = i - _y * 365 - _m * 30
