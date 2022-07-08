@@ -22,8 +22,8 @@ var bars = svg.selectAll(".myBars")
     .append("rect");
 
 bars.attr("x", 10)
-    .attr("y", function(d,i){ return 10 + i*40})
-    .attr("width", function(d){ return d})
+    .attr("y", function(d,i){ return 10 + i*40 })
+    .attr("width", function(d){ return d })
     .attr("height", 30);
 
 var texts = svg.selectAll(".myTexts")
@@ -31,9 +31,9 @@ var texts = svg.selectAll(".myTexts")
     .enter()
     .append("text");
 
-texts.attr("x", function(d){ return d + 16})
-    .attr("y", function(d,i){ return i + 16})
-    .text(function(d){ return d});
+texts.attr("x", function(d){ return d })
+    .attr("y", function(d,i){ return 30 + i*40 })
+    .text(function(d){ return d });
 }
 
 
